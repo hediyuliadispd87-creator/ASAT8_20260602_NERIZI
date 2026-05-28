@@ -1186,7 +1186,7 @@ function onNoPesertaInput() {
         detailEl.style.display = 'block'; modeManual = false;
       } else {
         infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Username tidak terdaftar';
-        manualEl.style.display = 'block'; modeManual = true;
+        manualEl.style.display = 'block'; modeManual = false;
       }
     } catch (_) { infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Gagal mengecek — periksa koneksi'; }
   }, 700);
