@@ -6,7 +6,6 @@
 <title>Ujian Online — Sistem Ujian Digital</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- ══════════════════════════════ FIREBASE SDK ══════════════════════════════ -->
 <script type="module">
 import { initializeApp }                  from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
 import { getAuth, signInAnonymously }     from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
@@ -14,12 +13,12 @@ import { getFirestore, collection, addDoc, serverTimestamp }
                                           from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAy-rDfQHrjtXLiSvGyPCMr2z5AqmeR6xo",
-  authDomain: "asat-kelas8-2526.firebaseapp.com",
-  projectId: "asat-kelas8-2526",
-  storageBucket: "asat-kelas8-2526.firebasestorage.app",
-  messagingSenderId: "112556014986",
-  appId: "1:112556014986:web:04df42649be0625ce19c73"
+  apiKey           : "AIzaSyBzWnBiP8NnJ0WYL5dYh6IEf4oYLzB8p0E",
+  authDomain       : "asaj-kelas78.firebaseapp.com",
+  projectId        : "asaj-kelas78",
+  storageBucket    : "asaj-kelas78.firebasestorage.app",
+  messagingSenderId: "290488851348",
+  appId            : "1:290488851348:web:7f4a13d84b31687fe7cd81",
 };
 
 const fbApp  = initializeApp(firebaseConfig);
@@ -73,16 +72,9 @@ window._fbKit = {
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 .hidden { display: none !important; }
 
-/* ═══════════════════════════════════════ OFFLINE BANNER */
 #offline-banner {
   position: fixed; top: 0; left: 0; right: 0; z-index: 99997;
   background: linear-gradient(135deg, #991b1b, #dc2626);
@@ -90,44 +82,29 @@ body {
   display: flex; align-items: center; justify-content: center; gap: 10px;
   padding: 10px 20px; transform: translateY(-100%);
   transition: transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
-  box-shadow: 0 4px 20px rgba(220,38,38,0.4);
-  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px rgba(220,38,38,0.4); letter-spacing: 0.01em;
 }
 #offline-banner.show { transform: translateY(0); }
-#offline-banner .ob-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #fca5a5; animation: obPulse 1.2s ease-in-out infinite;
-  flex-shrink: 0;
-}
+#offline-banner .ob-dot { width: 8px; height: 8px; border-radius: 50%; background: #fca5a5; animation: obPulse 1.2s ease-in-out infinite; flex-shrink: 0; }
 @keyframes obPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
-#offline-banner .ob-save-note {
-  font-size: 11px; font-weight: 600; opacity: .85;
-  background: rgba(255,255,255,.15); border-radius: 99px;
-  padding: 3px 10px; margin-left: 4px;
-}
+#offline-banner .ob-save-note { font-size: 11px; font-weight: 600; opacity: .85; background: rgba(255,255,255,.15); border-radius: 99px; padding: 3px 10px; margin-left: 4px; }
 
-/* ═══════════════════════════════════════ AUTO-SAVE BADGE */
 #autosave-badge {
   position: fixed; bottom: 24px; right: 20px; z-index: 9995;
-  background: var(--success); color: #fff;
-  font-size: 12px; font-weight: 700; border-radius: 99px;
+  background: var(--success); color: #fff; font-size: 12px; font-weight: 700; border-radius: 99px;
   padding: 8px 16px; display: flex; align-items: center; gap: 7px;
   box-shadow: 0 4px 16px rgba(22,163,74,.4);
   opacity: 0; transform: translateY(12px) scale(.95);
-  transition: opacity .25s ease, transform .25s ease;
-  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease; pointer-events: none;
 }
 #autosave-badge.show { opacity: 1; transform: translateY(0) scale(1); }
-#autosave-badge .as-icon { font-size: 14px; }
 
-/* ═══════════════════════════════════════ FIREBASE STATUS CHIP */
 #fb-status-chip {
   position: fixed; bottom: 24px; left: 20px; z-index: 9995;
   font-size: 11px; font-weight: 700; border-radius: 99px;
   padding: 7px 14px; display: flex; align-items: center; gap: 6px;
   opacity: 0; transform: translateY(8px);
-  transition: opacity .3s, transform .3s, background .3s;
-  pointer-events: none;
+  transition: opacity .3s, transform .3s, background .3s; pointer-events: none;
 }
 #fb-status-chip.show { opacity: 1; transform: translateY(0); }
 #fb-status-chip.connecting { background: var(--warn-soft); color: var(--warn); border: 1px solid #fbbf24; }
@@ -136,7 +113,6 @@ body {
 .fb-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
 .fb-dot.pulse { animation: obPulse 1s ease-in-out infinite; }
 
-/* ═══════════════════════════════════════ SESSION RESTORE CHIP */
 .session-restore-chip {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(22,163,74,0.2); border: 1px solid rgba(22,163,74,0.5);
@@ -146,106 +122,35 @@ body {
 }
 @keyframes chipFadeIn { from{opacity:0;transform:scale(.9)} to{opacity:1;transform:none} }
 
-/* ═══════════════════════════════════════ ROOM LOADING OVERLAY */
 #room-loading-overlay {
-  position: fixed; inset: 0; z-index: 99998;
-  display: none; align-items: center; justify-content: center;
-  background: rgba(12, 16, 34, 0.92);
-  backdrop-filter: blur(8px);
-  flex-direction: column; gap: 0;
+  position: fixed; inset: 0; z-index: 99998; display: none; align-items: center; justify-content: center;
+  background: rgba(12,16,34,0.92); backdrop-filter: blur(8px); flex-direction: column; gap: 0;
 }
 #room-loading-overlay.show { display: flex; }
-.room-loader-box {
-  position: relative; display: flex; flex-direction: column;
-  align-items: center; gap: 0;
-}
+.room-loader-box { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0; }
 .room-door-wrap { position: relative; width: 120px; height: 160px; margin-bottom: 32px; }
-.door-frame {
-  position: absolute; inset: 0;
-  border: 3px solid rgba(37,99,235,0.6); border-radius: 10px 10px 4px 4px;
-  background: transparent;
-  box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 0 30px rgba(37,99,235,0.15);
-}
-.door-leaf {
-  position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px;
-  border-radius: 8px 8px 2px 2px;
-  background: linear-gradient(160deg, #1a2860 0%, #0f1535 100%);
-  border-right: 2px solid rgba(37,99,235,0.3);
-  transform-origin: left center; transform-style: preserve-3d;
-  animation: doorOpenSwing 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
-  box-shadow: inset -6px 0 20px rgba(0,0,0,0.4);
-}
-@keyframes doorOpenSwing {
-  0%   { transform: perspective(600px) rotateY(0deg); }
-  60%  { transform: perspective(600px) rotateY(-78deg); }
-  100% { transform: perspective(600px) rotateY(-82deg); }
-}
-.door-knob {
-  position: absolute; right: 12px; top: 50%;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #93c5fd, #2563eb);
-  box-shadow: 0 0 8px rgba(37,99,235,0.8);
-  transform: translateY(-50%);
-  animation: doorOpenSwing 1.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
-  transform-origin: left center;
-}
-.door-light {
-  position: absolute; inset: 3px; border-radius: 8px 8px 2px 2px;
-  background: radial-gradient(ellipse at center, rgba(37,99,235,0.35) 0%, rgba(37,99,235,0.05) 60%, transparent 100%);
-  opacity: 0; animation: lightReveal 0.6s ease 1.5s forwards;
-}
-@keyframes lightReveal { 0% { opacity: 0; } 100% { opacity: 1; } }
-.door-floor {
-  position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
-  width: 180px; height: 20px; overflow: hidden; opacity: 0;
-  animation: floorReveal 0.5s ease 1.6s forwards;
-}
-.door-floor::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.4) 20%,
-    rgba(37,99,235,0.6) 50%, rgba(37,99,235,0.4) 80%, transparent 100%);
-  height: 2px; top: 0;
-}
-@keyframes floorReveal {
-  from { opacity: 0; transform: translateX(-50%) scaleX(0.3); }
-  to   { opacity: 1; transform: translateX(-50%) scaleX(1); }
-}
-.room-loader-title {
-  font-size: 18px; font-weight: 900; color: #fff;
-  letter-spacing: -0.01em; margin-bottom: 6px; text-align: center;
-  opacity: 0; transform: translateY(8px);
-  animation: rltextReveal 0.5s ease 1.8s forwards;
-}
-.room-loader-title span { background: linear-gradient(135deg, #93c5fd, #2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.room-loader-sub {
-  font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600;
-  letter-spacing: 0.05em; text-align: center; margin-bottom: 24px;
-  opacity: 0; transform: translateY(6px);
-  animation: rltextReveal 0.5s ease 1.95s forwards;
-}
-@keyframes rltextReveal { to { opacity: 1; transform: translateY(0); } }
+.door-frame { position: absolute; inset: 0; border: 3px solid rgba(37,99,235,0.6); border-radius: 10px 10px 4px 4px; background: transparent; box-shadow: 0 0 0 1px rgba(37,99,235,0.15), 0 0 30px rgba(37,99,235,0.15); }
+.door-leaf { position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px; border-radius: 8px 8px 2px 2px; background: linear-gradient(160deg,#1a2860 0%,#0f1535 100%); border-right: 2px solid rgba(37,99,235,0.3); transform-origin: left center; transform-style: preserve-3d; animation: doorOpenSwing 1.6s cubic-bezier(0.4,0,0.2,1) 0.4s both; box-shadow: inset -6px 0 20px rgba(0,0,0,0.4); }
+@keyframes doorOpenSwing { 0%{transform:perspective(600px) rotateY(0deg)} 60%{transform:perspective(600px) rotateY(-78deg)} 100%{transform:perspective(600px) rotateY(-82deg)} }
+.door-knob { position: absolute; right: 12px; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%,#93c5fd,#2563eb); box-shadow: 0 0 8px rgba(37,99,235,0.8); transform: translateY(-50%); animation: doorOpenSwing 1.6s cubic-bezier(0.4,0,0.2,1) 0.4s both; transform-origin: left center; }
+.door-light { position: absolute; inset: 3px; border-radius: 8px 8px 2px 2px; background: radial-gradient(ellipse at center,rgba(37,99,235,0.35) 0%,rgba(37,99,235,0.05) 60%,transparent 100%); opacity: 0; animation: lightReveal 0.6s ease 1.5s forwards; }
+@keyframes lightReveal { 0%{opacity:0} 100%{opacity:1} }
+.door-floor { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); width: 180px; height: 20px; overflow: hidden; opacity: 0; animation: floorReveal 0.5s ease 1.6s forwards; }
+.door-floor::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,transparent 0%,rgba(37,99,235,0.4) 20%,rgba(37,99,235,0.6) 50%,rgba(37,99,235,0.4) 80%,transparent 100%); height: 2px; top: 0; }
+@keyframes floorReveal { from{opacity:0;transform:translateX(-50%) scaleX(0.3)} to{opacity:1;transform:translateX(-50%) scaleX(1)} }
+.room-loader-title { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.01em; margin-bottom: 6px; text-align: center; opacity: 0; transform: translateY(8px); animation: rltextReveal 0.5s ease 1.8s forwards; }
+.room-loader-title span { background: linear-gradient(135deg,#93c5fd,#2563eb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.room-loader-sub { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.05em; text-align: center; margin-bottom: 24px; opacity: 0; transform: translateY(6px); animation: rltextReveal 0.5s ease 1.95s forwards; }
+@keyframes rltextReveal { to{opacity:1;transform:translateY(0)} }
 .room-loader-dots { display: flex; gap: 8px; justify-content: center; opacity: 0; animation: rltextReveal 0.4s ease 2.1s forwards; }
-.room-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(37,99,235,0.3); animation: dotPulse 1.4s ease-in-out infinite;
-}
-.room-dot:nth-child(1) { animation-delay: 0s; }
-.room-dot:nth-child(2) { animation-delay: 0.2s; }
-.room-dot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes dotPulse {
-  0%, 80%, 100% { background: rgba(37,99,235,0.3); transform: scale(1); }
-  40%            { background: #60a5fa; transform: scale(1.4); box-shadow: 0 0 8px rgba(96,165,250,0.8); }
-}
+.room-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(37,99,235,0.3); animation: dotPulse 1.4s ease-in-out infinite; }
+.room-dot:nth-child(1){animation-delay:0s} .room-dot:nth-child(2){animation-delay:0.2s} .room-dot:nth-child(3){animation-delay:0.4s}
+@keyframes dotPulse { 0%,80%,100%{background:rgba(37,99,235,0.3);transform:scale(1)} 40%{background:#60a5fa;transform:scale(1.4);box-shadow:0 0 8px rgba(96,165,250,0.8)} }
 .room-loader-bar-wrap { width: 200px; margin-top: 20px; opacity: 0; animation: rltextReveal 0.4s ease 2.2s forwards; }
 .room-loader-bar-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
-.room-loader-bar-fill {
-  height: 100%; width: 0%; background: linear-gradient(90deg, #2563eb, #93c5fd);
-  border-radius: 99px; animation: barFill 1.8s ease 2.3s forwards;
-  box-shadow: 0 0 6px rgba(37,99,235,0.8);
-}
-@keyframes barFill { to { width: 100%; } }
+.room-loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#2563eb,#93c5fd); border-radius: 99px; animation: barFill 1.8s ease 2.3s forwards; box-shadow: 0 0 6px rgba(37,99,235,0.8); }
+@keyframes barFill { to{width:100%} }
 
-/* ═══════════════════════════════════════ MATH NOTATION */
 sup, sub { font-size: 0.68em; line-height: 0; position: relative; vertical-align: baseline; }
 sup { top: -0.5em; color: inherit; }
 sub { bottom: -0.25em; color: inherit; }
@@ -255,79 +160,35 @@ sub { bottom: -0.25em; color: inherit; }
 .math-frac sup, .math-frac sub { font-size: 1em; position: static; line-height: 1; }
 .q-text, .opt-text { line-height: 1.8; }
 
-/* ═══════════════════════════════════════ SPLASH */
-#splash {
-  position: fixed; inset: 0; z-index: 99999;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: #0c1022; overflow: hidden;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
+#splash { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0c1022; overflow: hidden; transition: opacity 0.6s ease, transform 0.6s ease; }
 #splash.hide-out { opacity: 0; transform: scale(1.04); pointer-events: none; }
-#splash::before {
-  content: ''; position: absolute; inset: -60px;
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(37,99,235,0.28) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(96,165,250,0.18) 0%, transparent 70%);
-  animation: meshDrift 8s ease-in-out infinite alternate;
-}
-@keyframes meshDrift { from { transform: scale(1) rotate(0deg); } to { transform: scale(1.08) rotate(2deg); } }
-#splash::after {
-  content: ''; position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(37,99,235,0.3) 1px, transparent 1px);
-  background-size: 48px 48px; animation: gridScroll 22s linear infinite;
-}
-@keyframes gridScroll { from { transform: translate(0,0); } to { transform: translate(48px,48px); } }
+#splash::before { content: ''; position: absolute; inset: -60px; background: radial-gradient(ellipse 60% 50% at 20% 30%,rgba(37,99,235,0.28) 0%,transparent 70%), radial-gradient(ellipse 50% 60% at 80% 70%,rgba(96,165,250,0.18) 0%,transparent 70%); animation: meshDrift 8s ease-in-out infinite alternate; }
+@keyframes meshDrift { from{transform:scale(1) rotate(0deg)} to{transform:scale(1.08) rotate(2deg)} }
+#splash::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle,rgba(37,99,235,0.3) 1px,transparent 1px); background-size: 48px 48px; animation: gridScroll 22s linear infinite; }
+@keyframes gridScroll { from{transform:translate(0,0)} to{transform:translate(48px,48px)} }
 .splash-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
-.splash-logo-wrap {
-  position: relative; display: flex; align-items: center; justify-content: center;
-  margin-bottom: 28px; opacity: 0; transform: scale(0.6) translateY(20px);
-  animation: logoReveal 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards;
-}
-@keyframes logoReveal { to { opacity: 1; transform: scale(1) translateY(0); } }
-.splash-logo-glow {
-  position: absolute; width: 180px; height: 180px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,99,235,0.55) 0%, transparent 70%);
-  filter: blur(24px); animation: glowPulse 2.5s ease-in-out infinite;
-}
-@keyframes glowPulse { 0%,100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.15); opacity: 1; } }
-.splash-spinner-ring {
-  position: absolute; width: 140px; height: 140px; border-radius: 50%;
-  border: 2px solid transparent;
-  border-top-color: rgba(37,99,235,0.8); border-right-color: rgba(37,99,235,0.3);
-  animation: ringRotate 1.4s linear infinite;
-}
-@keyframes ringRotate { to { transform: rotate(360deg); } }
-.splash-logo-ring {
-  position: relative; width: 110px; height: 110px; border-radius: 28px;
-  background: linear-gradient(145deg, #1a2040, #242d5c);
-  border: 1.5px solid rgba(37,99,235,0.5);
-  box-shadow: 0 0 0 6px rgba(37,99,235,0.1), 0 0 0 12px rgba(37,99,235,0.05), 0 20px 60px rgba(0,0,0,0.5);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.splash-logo-ring img  { width: 78px; height: 78px; object-fit: contain; border-radius: 14px; }
+.splash-logo-wrap { position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 28px; opacity: 0; transform: scale(0.6) translateY(20px); animation: logoReveal 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.3s forwards; }
+@keyframes logoReveal { to{opacity:1;transform:scale(1) translateY(0)} }
+.splash-logo-glow { position: absolute; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle,rgba(37,99,235,0.55) 0%,transparent 70%); filter: blur(24px); animation: glowPulse 2.5s ease-in-out infinite; }
+@keyframes glowPulse { 0%,100%{transform:scale(1);opacity:0.7} 50%{transform:scale(1.15);opacity:1} }
+.splash-spinner-ring { position: absolute; width: 140px; height: 140px; border-radius: 50%; border: 2px solid transparent; border-top-color: rgba(37,99,235,0.8); border-right-color: rgba(37,99,235,0.3); animation: ringRotate 1.4s linear infinite; }
+@keyframes ringRotate { to{transform:rotate(360deg)} }
+.splash-logo-ring { position: relative; width: 110px; height: 110px; border-radius: 28px; background: linear-gradient(145deg,#1a2040,#242d5c); border: 1.5px solid rgba(37,99,235,0.5); box-shadow: 0 0 0 6px rgba(37,99,235,0.1),0 0 0 12px rgba(37,99,235,0.05),0 20px 60px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.splash-logo-ring img { width: 78px; height: 78px; object-fit: contain; border-radius: 14px; }
 .splash-logo-ring .logo-fallback { font-size: 42px; line-height: 1; }
-.splash-title {
-  font-size: 30px; font-weight: 900; color: #fff; letter-spacing: -0.02em; text-align: center;
-  opacity: 0; transform: translateY(14px); animation: slideUpAnim 0.6s ease 0.75s forwards;
-}
-.splash-title span { background: linear-gradient(135deg, #93c5fd, #2563eb, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.splash-subtitle {
-  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4);
-  letter-spacing: 0.12em; text-transform: uppercase; margin-top: 7px; text-align: center;
-  opacity: 0; transform: translateY(10px); animation: slideUpAnim 0.6s ease 0.9s forwards;
-}
-@keyframes slideUpAnim { to { opacity: 1; transform: translateY(0); } }
+.splash-title { font-size: 30px; font-weight: 900; color: #fff; letter-spacing: -0.02em; text-align: center; opacity: 0; transform: translateY(14px); animation: slideUpAnim 0.6s ease 0.75s forwards; }
+.splash-title span { background: linear-gradient(135deg,#93c5fd,#2563eb,#34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.splash-subtitle { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 7px; text-align: center; opacity: 0; transform: translateY(10px); animation: slideUpAnim 0.6s ease 0.9s forwards; }
+@keyframes slideUpAnim { to{opacity:1;transform:translateY(0)} }
 .splash-progress-wrap { margin-top: 44px; width: 200px; opacity: 0; animation: slideUpAnim 0.5s ease 1.1s forwards; }
 .splash-progress-track { height: 3px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden; }
-.splash-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #2563eb, #93c5fd); border-radius: 99px; transition: width 0.1s linear; box-shadow: 0 0 8px rgba(37,99,235,0.9); }
+.splash-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg,#2563eb,#93c5fd); border-radius: 99px; transition: width 0.1s linear; box-shadow: 0 0 8px rgba(37,99,235,0.9); }
 .splash-status { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 10px; letter-spacing: 0.05em; font-weight: 500; }
 .splash-dev { position: absolute; bottom: 28px; font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 0.08em; font-weight: 500; }
 
-/* ═══════════════════════════════════════ APP */
 #app { display: flex; align-items: flex-start; justify-content: center; padding: 32px 16px 80px; min-height: 100vh; opacity: 0; transition: opacity 0.5s ease 0.1s; }
 #app.visible { opacity: 1; }
 
-/* ═══════════════════════════════════════ TOAST */
 #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
 .toast { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--border); box-shadow: 0 8px 32px rgba(0,0,0,0.13); min-width: 280px; max-width: 360px; pointer-events: all; animation: toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1); transition: opacity 0.3s, transform 0.3s; }
 .toast.fade-out { opacity: 0; transform: translateX(20px); }
@@ -338,13 +199,12 @@ sub { bottom: -0.25em; color: inherit; }
 .toast-icon.warn    { background: var(--warn-soft);    color: var(--warn); }
 .toast-body .t-title { font-size: 13px; font-weight: 700; color: var(--text); }
 .toast-body .t-msg   { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
-@keyframes toastIn { from { opacity:0; transform: translateX(40px) scale(.95); } to { opacity:1; transform: none; } }
+@keyframes toastIn { from{opacity:0;transform:translateX(40px) scale(.95)} to{opacity:1;transform:none} }
 
-/* ═══════════════════════════════════════ MODAL */
 #modal-overlay { position: fixed; inset: 0; background: rgba(15,18,33,0.55); display: none; align-items: center; justify-content: center; z-index: 9998; backdrop-filter: blur(3px); }
 #modal-overlay.show { display: flex; }
 .modal-box { background: var(--surface); border-radius: var(--radius); padding: 36px 32px; max-width: 420px; width: 92%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-@keyframes modalPop { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: none; } }
+@keyframes modalPop { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:none} }
 .modal-icon { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
 .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
 .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
@@ -358,13 +218,12 @@ sub { bottom: -0.25em; color: inherit; }
 .modal-btn.danger  { background: var(--danger); color: #fff; }
 .modal-btn.danger:hover { background: #b91c1c; }
 
-/* ═══════════════════════════════════════ COMMON */
 .btn-primary { width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; font-family: var(--font); cursor: pointer; transition: background .2s, transform .1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-primary:hover:not(:disabled) { background: #1d4ed8; }
 .btn-primary:active:not(:disabled) { transform: scale(0.98); }
 .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
 .spinner { width: 16px; height: 16px; border: 2.5px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin { to{transform:rotate(360deg)} }
 .field { margin-bottom: 20px; }
 .field label { display: block; font-size: 11px; font-weight: 800; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; }
 .field input, .field select { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 15px; font-family: var(--font); color: var(--text); background: var(--surface); outline: none; transition: border-color .2s; }
@@ -374,42 +233,32 @@ sub { bottom: -0.25em; color: inherit; }
 .info-row.err  { color: var(--danger); }
 .info-row.load { color: var(--muted); }
 
-/* ═══════════════════════════════════════ COVER */
 #hal-cover { width: 100%; max-width: 560px; }
 .cover-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; box-shadow: 0 8px 32px rgba(37,99,235,.12); position: relative; }
-.cover-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb); }
-.cover-banner { background: linear-gradient(135deg, #0c1022 0%, #1a2040 50%, #0c1022 100%); padding: 48px 32px 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative; overflow: hidden; }
-.cover-banner::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(37,99,235,0.2) 1px, transparent 1px); background-size: 32px 32px; pointer-events: none; }
-.cover-logo-wrap { position: relative; z-index: 1; width: 96px; height: 96px; border-radius: 24px; background: linear-gradient(145deg, #1a2040, #2a3060); border: 1.5px solid rgba(37,99,235,0.5); box-shadow: 0 0 0 5px rgba(37,99,235,.12), 0 10px 40px rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.cover-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg,#2563eb,#7c3aed,#2563eb); }
+.cover-banner { background: linear-gradient(135deg,#0c1022 0%,#1a2040 50%,#0c1022 100%); padding: 48px 32px 36px; display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative; overflow: hidden; }
+.cover-banner::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle,rgba(37,99,235,0.2) 1px,transparent 1px); background-size: 32px 32px; pointer-events: none; }
+.cover-logo-wrap { position: relative; z-index: 1; width: 96px; height: 96px; border-radius: 24px; background: linear-gradient(145deg,#1a2040,#2a3060); border: 1.5px solid rgba(37,99,235,0.5); box-shadow: 0 0 0 5px rgba(37,99,235,.12),0 10px 40px rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cover-logo-wrap img  { width: 70px; height: 70px; object-fit: contain; border-radius: 14px; }
 .cover-logo-wrap span { font-size: 38px; }
 .cover-title { position: relative; z-index: 1; text-align: center; font-size: 20px; font-weight: 900; color: #fff; line-height: 1.3; letter-spacing: -.01em; }
-.cover-year { position: relative; z-index: 1; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase; background: rgba(255,255,255,.07); padding: 6px 18px; border-radius: 99px; border: 1px solid rgba(255,255,255,.1); }
-.cover-body { padding: 32px; }
+.cover-year  { position: relative; z-index: 1; font-size: 13px; font-weight: 700; color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase; background: rgba(255,255,255,.07); padding: 6px 18px; border-radius: 99px; border: 1px solid rgba(255,255,255,.1); }
+.cover-body  { padding: 32px; }
 .cover-body h3 { font-size: 13px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
 .cover-start-btn { width: 100%; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 800; font-family: var(--font); cursor: pointer; transition: .2s; letter-spacing: .02em; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 6px 20px rgba(37,99,235,.35); }
 .cover-start-btn:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(37,99,235,.45); }
+.firebase-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,165,0,0.12); border: 1px solid rgba(255,165,0,0.3); color: #fbbf24; font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 99px; letter-spacing: .04em; margin-top: 12px; width: 100%; justify-content: center; }
 
-/* ═══════════════════════════════════════ FIREBASE INFO BADGE on cover */
-.firebase-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(255,165,0,0.12); border: 1px solid rgba(255,165,0,0.3);
-  color: #fbbf24; font-size: 11px; font-weight: 700;
-  padding: 5px 12px; border-radius: 99px; letter-spacing: .04em;
-  margin-top: 12px; width: 100%; justify-content: center;
-}
-
-/* ═══════════════════════════════════════ PESERTA */
 #hal-peserta { width: 100%; max-width: 480px; }
 .page-brand { text-align: center; margin-bottom: 28px; }
-.brand-logo { width: 60px; height: 60px; border-radius: 18px; background: linear-gradient(135deg, var(--accent), #7c3aed); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(37,99,235,.3); }
+.brand-logo { width: 60px; height: 60px; border-radius: 18px; background: linear-gradient(135deg,var(--accent),#7c3aed); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(37,99,235,.3); }
 .brand-logo img  { width: 42px; height: 42px; object-fit: contain; border-radius: 10px; }
 .brand-logo span { font-size: 26px; }
 .page-brand h1 { font-size: 22px; font-weight: 900; color: var(--text); }
 .page-brand p  { font-size: 13px; color: var(--muted); margin-top: 3px; }
 .login-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow); }
 .siswa-detail { background: var(--success-soft); border: 1.5px solid var(--success); border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 8px; display: none; animation: fadeSlideIn .3s ease; }
-@keyframes fadeSlideIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+@keyframes fadeSlideIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
 .siswa-detail-row { display: flex; gap: 10px; flex-wrap: wrap; }
 .siswa-detail-item { flex: 1; min-width: 100px; }
 .siswa-detail-item .sd-label { font-size: 10px; font-weight: 800; color: var(--success); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
@@ -426,36 +275,35 @@ sub { bottom: -0.25em; color: inherit; }
 .mapel-info-box .mi-val   { font-size: 15px; font-weight: 800; color: var(--navy); }
 .mapel-info-box .mi-hint  { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
-/* ═══════════════════════════════════════ SOAL */
 #hal-soal { width: 100%; max-width: 780px; }
 .exam-header { background: var(--navy); border-radius: var(--radius); padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; box-shadow: 0 8px 32px rgba(26,31,54,.25); }
 .exam-header .stu-info h2 { font-size: 15px; font-weight: 800; color: #fff; }
 .exam-header .stu-info p  { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 2px; }
 .mapel-badge { background: rgba(37,99,235,0.3); color: var(--accent-mid); padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; border: 1px solid rgba(37,99,235,0.4); white-space: nowrap; }
 .timer-bar { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 12px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow); transition: border-color .3s; }
-.timer-bar.reading  { border-color: var(--warn); background: var(--warn-soft); }
-.timer-bar.active   { border-color: var(--border); }
-.timer-icon { font-size: 18px; flex-shrink: 0; }
+.timer-bar.reading { border-color: var(--warn); background: var(--warn-soft); }
+.timer-bar.active  { border-color: var(--border); }
+.timer-icon  { font-size: 18px; flex-shrink: 0; }
 .timer-label { font-size: 13px; font-weight: 700; color: var(--text); flex: 1; }
 .timer-label.reading-mode { color: var(--warn); }
 .timer-countdown { font-size: 22px; font-weight: 900; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -.02em; min-width: 40px; text-align: right; }
 .timer-countdown.warning { color: var(--danger); animation: timerPulse .5s ease-in-out infinite alternate; }
-@keyframes timerPulse { from { opacity:1; } to { opacity:.5; } }
+@keyframes timerPulse { from{opacity:1} to{opacity:.5} }
 .timer-bar-track { flex: 1; height: 5px; background: var(--border); border-radius: 99px; overflow: hidden; }
 .timer-bar-fill  { height: 100%; background: var(--accent); border-radius: 99px; transition: width .9s linear; }
-.timer-bar.reading .timer-bar-fill  { background: var(--warn); }
+.timer-bar.reading .timer-bar-fill { background: var(--warn); }
 .options-blocker { pointer-events: none; opacity: .45; user-select: none; transition: opacity .4s; }
 .options-blocker .option-label { cursor: not-allowed !important; }
-.progress-wrap { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px; }
+.progress-wrap  { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 14px 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 16px; }
 .progress-track { flex: 1; height: 6px; background: var(--bg); border-radius: 99px; overflow: hidden; }
 .progress-fill  { height: 100%; background: var(--accent); border-radius: 99px; transition: width .4s cubic-bezier(.4,0,.2,1); }
 .progress-count { font-size: 13px; font-weight: 800; color: var(--accent); white-space: nowrap; }
 .palette-toggle-bar { display: flex; align-items: center; justify-content: space-between; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 13px 20px; margin-bottom: 16px; cursor: pointer; transition: border-color .2s, box-shadow .2s; user-select: none; }
 .palette-toggle-bar:hover { border-color: var(--accent-mid); box-shadow: 0 2px 12px rgba(37,99,235,.08); }
-.palette-toggle-left { display: flex; align-items: center; gap: 10px; }
+.palette-toggle-left  { display: flex; align-items: center; gap: 10px; }
 .palette-toggle-label { font-size: 13px; font-weight: 700; color: var(--text); }
 .palette-toggle-count { font-size: 11px; font-weight: 800; background: var(--accent-soft); color: var(--accent); padding: 3px 10px; border-radius: 99px; }
-.palette-toggle-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: transform .3s, background .2s; flex-shrink: 0; }
+.palette-toggle-icon  { width: 30px; height: 30px; border-radius: 8px; background: var(--bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: transform .3s, background .2s; flex-shrink: 0; }
 .palette-toggle-bar.open .palette-toggle-icon { transform: rotate(180deg); background: var(--accent-soft); border-color: var(--accent-mid); }
 #palette-overlay { position: fixed; inset: 0; background: rgba(15,18,33,.5); z-index: 8000; display: none; align-items: flex-end; justify-content: center; backdrop-filter: blur(2px); }
 #palette-overlay.show { display: flex; }
@@ -467,7 +315,7 @@ sub { bottom: -0.25em; color: inherit; }
 .palette-header-title { font-size: 15px; font-weight: 800; color: var(--text); }
 .palette-stats { display: flex; gap: 8px; }
 .pstat { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 99px; }
-.pstat.ans { background: var(--accent-soft); color: var(--accent); }
+.pstat.ans   { background: var(--accent-soft); color: var(--accent); }
 .pstat.unans { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
 .palette-close { width: 30px; height: 30px; border-radius: 8px; background: var(--bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 15px; transition: .15s; }
 .palette-close:hover { background: var(--danger-soft); border-color: var(--danger); }
@@ -475,8 +323,8 @@ sub { bottom: -0.25em; color: inherit; }
 .palette-legend { display: flex; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); font-weight: 600; }
 .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
-.legend-dot.ans { background: var(--accent); }
-.legend-dot.cur { background: var(--accent-soft); border: 1.5px solid var(--accent); }
+.legend-dot.ans        { background: var(--accent); }
+.legend-dot.cur        { background: var(--accent-soft); border: 1.5px solid var(--accent); }
 .legend-dot.unanswered { background: var(--bg); border: 1.5px solid var(--border); }
 .q-palette-grid { display: flex; flex-wrap: wrap; gap: 6px; }
 .q-num { width: 38px; height: 38px; border-radius: var(--radius-xs); border: 1.5px solid var(--border); background: var(--bg); font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: .15s; }
@@ -487,7 +335,7 @@ sub { bottom: -0.25em; color: inherit; }
 .q-card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; margin-bottom: 18px; box-shadow: var(--shadow); }
 .q-number-tag { display: inline-block; background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 800; padding: 4px 14px; border-radius: 99px; margin-bottom: 14px; letter-spacing: .05em; }
 .q-text { font-size: 17px; font-weight: 600; line-height: 1.65; color: var(--text); margin-bottom: 18px; }
-.q-img { max-width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); margin: 14px 0 18px; display: block; }
+.q-img  { max-width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); margin: 14px 0 18px; display: block; }
 .option-list { display: flex; flex-direction: column; gap: 10px; }
 .option-item input[type="radio"] { display: none; }
 .option-label { display: flex; align-items: flex-start; gap: 14px; padding: 14px 18px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); cursor: pointer; transition: border-color .15s, background .15s; }
@@ -496,7 +344,7 @@ sub { bottom: -0.25em; color: inherit; }
 .opt-key { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; color: var(--muted); background: var(--bg); transition: .15s; }
 .option-item input[type="radio"]:checked + .option-label .opt-key { background: var(--accent); border-color: var(--accent); color: #fff; }
 .opt-text { font-size: 15px; color: var(--text); line-height: 1.5; padding-top: 2px; }
-.opt-img { max-width: 220px; border-radius: var(--radius-xs); margin-top: 8px; display: block; border: 1px solid var(--border); }
+.opt-img  { max-width: 220px; border-radius: var(--radius-xs); margin-top: 8px; display: block; border: 1px solid var(--border); }
 .nav-btns { display: flex; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; }
 .btn-nav { padding: 12px 22px; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--surface); font-size: 14px; font-weight: 700; font-family: var(--font); color: var(--text); cursor: pointer; transition: .15s; display: flex; align-items: center; gap: 8px; }
 .btn-nav:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
@@ -504,13 +352,13 @@ sub { bottom: -0.25em; color: inherit; }
 .btn-nav.next { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn-nav.next:hover:not(:disabled) { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
 .btn-nav.skip { background: var(--bg); color: var(--muted); font-size: 13px; padding: 10px 18px; }
-.btn-nav.next.highlight-pulse { animation: nextBtnPulse 0.65s cubic-bezier(0.34, 1.56, 0.64, 1); }
-@keyframes nextBtnPulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,99,235,0.7); } 40% { transform: scale(1.07); box-shadow: 0 0 0 10px rgba(37,99,235,0); } 70% { transform: scale(0.97); } 100% { transform: scale(1); box-shadow: none; } }
+.btn-nav.next.highlight-pulse { animation: nextBtnPulse 0.65s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes nextBtnPulse { 0%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,99,235,0.7)} 40%{transform:scale(1.07);box-shadow:0 0 0 10px rgba(37,99,235,0)} 70%{transform:scale(0.97)} 100%{transform:scale(1);box-shadow:none} }
 .submit-card { background: var(--surface); border-radius: var(--radius); border: 1.5px solid var(--success); padding: 28px; margin-bottom: 40px; display: none; opacity: 0; transform: translateY(24px) scale(.98); transition: opacity .45s ease, transform .45s cubic-bezier(.34,1.3,.64,1); box-shadow: 0 8px 32px rgba(22,163,74,.12); }
 .submit-card.show { display: block; }
 .submit-card.animate-in { opacity: 1; transform: translateY(0) scale(1); }
 .submit-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.submit-card-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--success-soft); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.submit-card-icon  { width: 46px; height: 46px; border-radius: 12px; background: var(--success-soft); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 .submit-card-title { font-size: 16px; font-weight: 800; color: var(--text); }
 .submit-card-sub   { font-size: 13px; color: var(--muted); margin-top: 2px; }
 .submit-card hr    { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
@@ -526,6 +374,11 @@ sub { bottom: -0.25em; color: inherit; }
 .cache-clear-btn { font-size: 11px; font-weight: 700; color: var(--danger); background: var(--danger-soft); border: 1px solid #fca5a5; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-family: var(--font); transition: .15s; white-space: nowrap; }
 .cache-clear-btn:hover { background: var(--danger); color: #fff; }
 
+.password-wrapper { position: relative; display: flex; align-items: center; }
+.password-wrapper input { padding-right: 45px; }
+.password-toggle-btn { position: absolute; right: 12px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; padding: 6px; display: flex; align-items: center; justify-content: center; transition: color .2s; }
+.password-toggle-btn:hover { color: var(--text); }
+
 @media (max-width:600px) {
   .exam-header { padding: 14px 16px; }
   .q-card { padding: 20px 16px; }
@@ -538,26 +391,22 @@ sub { bottom: -0.25em; color: inherit; }
 </head>
 <body>
 
-<!-- ════════════════════════════ OFFLINE BANNER -->
 <div id="offline-banner">
   <div class="ob-dot"></div>
   <span>Koneksi terputus — jawaban Anda tetap aman tersimpan</span>
   <span class="ob-save-note">💾 Tersimpan lokal</span>
 </div>
 
-<!-- ════════════════════════════ AUTO-SAVE BADGE -->
 <div id="autosave-badge">
   <span class="as-icon">💾</span>
   <span>Jawaban tersimpan</span>
 </div>
 
-<!-- ════════════════════════════ FIREBASE STATUS CHIP -->
 <div id="fb-status-chip" class="connecting show">
   <div class="fb-dot pulse"></div>
   <span id="fb-status-text">Menghubungkan Firebase...</span>
 </div>
 
-<!-- ════════════════════════════ SPLASH -->
 <div id="splash">
   <div class="splash-inner">
     <div class="splash-logo-wrap">
@@ -580,23 +429,18 @@ sub { bottom: -0.25em; color: inherit; }
   <div class="splash-dev">Sistem Ujian Digital © 2025</div>
 </div>
 
-<!-- ════════════════════════════ ROOM LOADING OVERLAY -->
 <div id="room-loading-overlay">
   <div class="room-loader-box">
     <div class="room-door-wrap">
       <div class="door-frame"></div>
-      <div class="door-leaf">
-        <div class="door-knob"></div>
-      </div>
+      <div class="door-leaf"><div class="door-knob"></div></div>
       <div class="door-light"></div>
       <div class="door-floor"></div>
     </div>
     <div class="room-loader-title">Memuat <span id="room-loader-label">Data</span></div>
     <div class="room-loader-sub"><span id="room-loader-sub-text">Menghubungi server ujian...</span></div>
     <div class="room-loader-dots">
-      <div class="room-dot"></div>
-      <div class="room-dot"></div>
-      <div class="room-dot"></div>
+      <div class="room-dot"></div><div class="room-dot"></div><div class="room-dot"></div>
     </div>
     <div class="room-loader-bar-wrap">
       <div class="room-loader-bar-track">
@@ -606,16 +450,14 @@ sub { bottom: -0.25em; color: inherit; }
   </div>
 </div>
 
-<!-- ════════════════════════════ MAIN APP -->
 <div id="app">
   <div id="toast-container"></div>
 
-  <!-- MODAL -->
   <div id="modal-overlay">
     <div class="modal-box">
-      <div class="modal-icon" id="modal-icon"></div>
-      <div class="modal-title" id="modal-title"></div>
-      <div class="modal-sub"   id="modal-sub"></div>
+      <div class="modal-icon"    id="modal-icon"></div>
+      <div class="modal-title"   id="modal-title"></div>
+      <div class="modal-sub"     id="modal-sub"></div>
       <div class="modal-actions" id="modal-actions"></div>
     </div>
   </div>
@@ -629,7 +471,7 @@ sub { bottom: -0.25em; color: inherit; }
           <span id="cover-logo-fallback">📝</span>
         </div>
         <div class="cover-title" id="cover-judul">Memuat judul...</div>
-        <div class="cover-year" id="cover-tahun"></div>
+        <div class="cover-year"  id="cover-tahun"></div>
       </div>
       <div class="cover-body">
         <h3>Informasi Ujian</h3>
@@ -637,12 +479,8 @@ sub { bottom: -0.25em; color: inherit; }
           Pastikan Anda membawa nomor peserta dan mengetahui kode mata pelajaran.
           Ujian dikerjakan secara individu dan tidak boleh bekerja sama.
         </div>
-        <button class="cover-start-btn" id="btn-cover-start">
-          Mulai Pendaftaran Ujian →
-        </button>
-        <div class="firebase-badge" id="cover-fb-badge">
-          🔥 Jawaban disimpan langsung ke Firebase — aman &amp; real-time
-        </div>
+        <button class="cover-start-btn" id="btn-cover-start">Mulai Pendaftaran Ujian →</button>
+        <div class="firebase-badge">🔥 Jawaban disimpan langsung ke Firebase — aman &amp; real-time</div>
       </div>
     </div>
     <div class="cache-panel" id="cache-panel" style="display:none;margin-top:14px">
@@ -669,37 +507,17 @@ sub { bottom: -0.25em; color: inherit; }
         <div class="info-row" id="info-peserta"></div>
         <div class="siswa-detail" id="siswa-detail">
           <div class="siswa-detail-row">
-            <div class="siswa-detail-item">
-              <div class="sd-label">Nama</div>
-              <div class="sd-val" id="sd-nama">—</div>
-            </div>
-            <div class="siswa-detail-item">
-              <div class="sd-label">Kelas</div>
-              <div class="sd-val" id="sd-kelas">—</div>
-            </div>
-            <div class="siswa-detail-item">
-              <div class="sd-label">Sekolah</div>
-              <div class="sd-val" id="sd-sekolah">—</div>
-            </div>
+            <div class="siswa-detail-item"><div class="sd-label">Nama</div><div class="sd-val" id="sd-nama">—</div></div>
+            <div class="siswa-detail-item"><div class="sd-label">Kelas</div><div class="sd-val" id="sd-kelas">—</div></div>
+            <div class="siswa-detail-item"><div class="sd-label">Sekolah</div><div class="sd-val" id="sd-sekolah">—</div></div>
           </div>
         </div>
         <div id="manual-wrap">
           <div class="manual-head"><span></span>Nomor tidak terdaftar — Isi data manual</div>
-          <div class="manual-field">
-            <label>Nama Lengkap</label>
-            <input type="text" id="manual-nama" placeholder="Ketik nama lengkap">
-          </div>
-          <div class="manual-field">
-            <label>Kelas</label>
-            <input type="text" id="manual-kelas" placeholder="Contoh: X IPA 1">
-          </div>
-          <div class="manual-field">
-            <label>Sekolah</label>
-            <input type="text" id="manual-sekolah" placeholder="Nama sekolah">
-          </div>
-          <div style="font-size:11px;color:#92400e;margin-top:8px;line-height:1.5">
-            ⚠️ Data ini akan langsung dicatat. Pastikan nama, kelas, dan sekolah benar.
-          </div>
+          <div class="manual-field"><label>Nama Lengkap</label><input type="text" id="manual-nama" placeholder="Ketik nama lengkap"></div>
+          <div class="manual-field"><label>Kelas</label><input type="text" id="manual-kelas" placeholder="Contoh: X IPA 1"></div>
+          <div class="manual-field"><label>Sekolah</label><input type="text" id="manual-sekolah" placeholder="Nama sekolah"></div>
+          <div style="font-size:11px;color:#92400e;margin-top:8px;line-height:1.5">⚠️ Data ini akan langsung dicatat. Pastikan nama, kelas, dan sekolah benar.</div>
         </div>
       </div>
       <div class="field" style="margin-top:4px">
@@ -714,11 +532,12 @@ sub { bottom: -0.25em; color: inherit; }
       </div>
       <div class="field">
         <label>Password Mulai</label>
-        <input type="password" id="pass-mulai" placeholder="Masukkan password dari pengawas">
+        <div class="password-wrapper">
+          <input type="password" id="pass-mulai" placeholder="Masukkan password dari pengawas">
+          <button type="button" class="password-toggle-btn" id="toggle-pass-mulai" title="Tampilkan password">👁️</button>
+        </div>
       </div>
-      <button class="btn-primary" id="btn-mulai">
-        Masuk ke Ruang Ujian
-      </button>
+      <button class="btn-primary" id="btn-mulai">Masuk ke Ruang Ujian</button>
     </div>
   </div>
 
@@ -767,15 +586,15 @@ sub { bottom: -0.25em; color: inherit; }
       </div>
       <hr>
       <p>Pastikan semua jawaban sudah benar sebelum mengirim. Jawaban tidak dapat diubah setelah dikirim.</p>
-      <input type="password" id="pass-selesai" placeholder="Password selesai dari pengawas">
-      <button class="btn-submit" id="btn-kirim">
-        🔥 Kirim Semua Jawaban ke Firebase
-      </button>
+      <div class="password-wrapper">
+        <input type="password" id="pass-selesai" placeholder="Password selesai dari pengawas">
+        <button type="button" class="password-toggle-btn" id="toggle-pass-selesai" title="Tampilkan password">👁️</button>
+      </div>
+      <button class="btn-submit" id="btn-kirim">🔥 Kirim Semua Jawaban ke Firebase</button>
     </div>
   </div>
 </div>
 
-<!-- PALETTE SHEET -->
 <div id="palette-overlay">
   <div class="palette-sheet" id="palette-sheet">
     <div class="palette-handle" id="palette-handle-close">
@@ -805,58 +624,31 @@ sub { bottom: -0.25em; color: inherit; }
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbzCLAWGFHEKC0xez7-aTaCWlknsf-Wustlys4Lj9TIDk-7wLSp8SbVAPqdcEDUFwL4/exec';
 
-/* ════════════════════════════════════════════════
-   FIREBASE STATUS UI
-   ════════════════════════════════════════════════ */
+/* ═══════════════ FIREBASE STATUS ═══════════════ */
 function setFbStatus(state, text) {
   const chip = document.getElementById('fb-status-chip');
   const txt  = document.getElementById('fb-status-text');
-  chip.className = 'show';
-  chip.classList.add(state);
-  txt.textContent = text;
-  const dot = chip.querySelector('.fb-dot');
-  dot.className = 'fb-dot' + (state === 'connecting' ? ' pulse' : '');
-  if (state === 'ready') {
-    setTimeout(() => { chip.classList.remove('show'); }, 3500);
-  }
+  chip.className = 'show'; chip.classList.add(state); txt.textContent = text;
+  chip.querySelector('.fb-dot').className = 'fb-dot' + (state === 'connecting' ? ' pulse' : '');
+  if (state === 'ready') setTimeout(() => chip.classList.remove('show'), 3500);
 }
-
 let fbReadyPoll = setInterval(() => {
-  if (window._fbKit) {
-    clearInterval(fbReadyPoll);
-    setFbStatus('ready', '🔥 Firebase siap');
-  }
+  if (window._fbKit) { clearInterval(fbReadyPoll); setFbStatus('ready', '🔥 Firebase siap'); }
 }, 300);
 setTimeout(() => {
-  if (!window._fbKit) {
-    clearInterval(fbReadyPoll);
-    setFbStatus('error', '⚠ Firebase gagal terhubung');
-  }
+  if (!window._fbKit) { clearInterval(fbReadyPoll); setFbStatus('error', '⚠ Firebase gagal terhubung'); }
 }, 10000);
 
-/* ════════════════════════════════════════════════
-   CACHE SYSTEM
-   ════════════════════════════════════════════════ */
+/* ═══════════════ CACHE SYSTEM ═══════════════ */
 const CACHE_VERSION = 'v2';
-const CACHE_TTL = {
-  cover  : 24 * 60 * 60 * 1000,
-  logo   : 7  * 24 * 60 * 60 * 1000,
-  mapel  : 15 * 60 * 1000,
-  image  : 3  * 24 * 60 * 60 * 1000,
-  session: 24 * 60 * 60 * 1000,
-};
-
+const CACHE_TTL = { cover:86400000, logo:604800000, mapel:900000, image:259200000, session:86400000 };
 function cacheSet(key, data, ttl) {
-  try {
-    localStorage.setItem('exam_cache_' + key, JSON.stringify({ v: CACHE_VERSION, ts: Date.now(), ttl, data }));
-  } catch (e) {
-    if (e.name === 'QuotaExceededError') pruneOldImages();
-  }
+  try { localStorage.setItem('exam_cache_' + key, JSON.stringify({ v: CACHE_VERSION, ts: Date.now(), ttl, data })); }
+  catch (e) { if (e.name === 'QuotaExceededError') pruneOldImages(); }
 }
 function cacheGet(key) {
   try {
-    const raw = localStorage.getItem('exam_cache_' + key);
-    if (!raw) return null;
+    const raw = localStorage.getItem('exam_cache_' + key); if (!raw) return null;
     const r = JSON.parse(raw);
     if (r.v !== CACHE_VERSION) { localStorage.removeItem('exam_cache_' + key); return null; }
     if (Date.now() - r.ts > r.ttl) { localStorage.removeItem('exam_cache_' + key); return null; }
@@ -866,111 +658,58 @@ function cacheGet(key) {
 function cacheRemove(key) { localStorage.removeItem('exam_cache_' + key); }
 function pruneOldImages() {
   const keys = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k && k.startsWith('exam_cache_img_')) keys.push(k);
-  }
-  keys.sort((a, b) => {
-    try { return JSON.parse(localStorage.getItem(a)).ts - JSON.parse(localStorage.getItem(b)).ts; }
-    catch (_) { return 0; }
-  });
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith('exam_cache_img_')) keys.push(k); }
+  keys.sort((a, b) => { try { return JSON.parse(localStorage.getItem(a)).ts - JSON.parse(localStorage.getItem(b)).ts; } catch (_) { return 0; } });
   keys.slice(0, Math.ceil(keys.length / 2)).forEach(k => localStorage.removeItem(k));
 }
 function clearAllCacheInternal() {
   const toRemove = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k && k.startsWith('exam_cache_')) toRemove.push(k);
-  }
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith('exam_cache_')) toRemove.push(k); }
   toRemove.forEach(k => localStorage.removeItem(k));
 }
 function getCacheStats() {
   let count = 0, bytes = 0;
-  for (let i = 0; i < localStorage.length; i++) {
-    const k = localStorage.key(i);
-    if (k && k.startsWith('exam_cache_')) {
-      count++; bytes += (localStorage.getItem(k) || '').length * 2;
-    }
-  }
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith('exam_cache_')) { count++; bytes += (localStorage.getItem(k) || '').length * 2; } }
   return { count, kb: Math.round(bytes / 1024) };
 }
 
-/* ════════════════════════════════════════════════
-   SESSION PERSISTENCE
-   ════════════════════════════════════════════════ */
-function sessionKey(noPeserta, kodeMapel) { return 'session_' + noPeserta + '_' + kodeMapel; }
-
+/* ═══════════════ SESSION ═══════════════ */
+function sessionKey(no, kode) { return 'session_' + no + '_' + kode; }
 function saveSession() {
   if (!siswaAktif || soalList.length === 0) return;
   cacheSet(sessionKey(siswaAktif['no peserta'] || '', kodeMapelAktif), {
     jawaban, currentIdx, soalList, siswaAktif,
-    kodeMapel    : kodeMapelAktif,
-    mataPelajaran: mataPelajaranAktif,
-    savedAt      : new Date().toLocaleTimeString('id-ID'),
+    kodeMapel: kodeMapelAktif, mataPelajaran: mataPelajaranAktif,
+    savedAt: new Date().toLocaleTimeString('id-ID'),
   }, CACHE_TTL.session);
   showAutosaveBadge();
 }
-function loadSession(noPeserta, kodeMapel) { return cacheGet(sessionKey(noPeserta, kodeMapel)); }
-function clearSession() {
-  if (!siswaAktif) return;
-  cacheRemove(sessionKey(siswaAktif['no peserta'] || '', kodeMapelAktif));
-}
-
+function loadSession(no, kode) { return cacheGet(sessionKey(no, kode)); }
+function clearSession() { if (!siswaAktif) return; cacheRemove(sessionKey(siswaAktif['no peserta'] || '', kodeMapelAktif)); }
 let _autosaveTimer = null;
 function showAutosaveBadge() {
-  const badge = document.getElementById('autosave-badge');
-  badge.classList.add('show');
-  clearTimeout(_autosaveTimer);
-  _autosaveTimer = setTimeout(() => badge.classList.remove('show'), 2000);
+  const badge = document.getElementById('autosave-badge'); badge.classList.add('show');
+  clearTimeout(_autosaveTimer); _autosaveTimer = setTimeout(() => badge.classList.remove('show'), 2000);
 }
-function showSessionChip(show) {
-  const chip = document.getElementById('session-saved-chip');
-  if (chip) chip.style.display = show ? 'inline-flex' : 'none';
-}
+function showSessionChip(show) { const c = document.getElementById('session-saved-chip'); if (c) c.style.display = show ? 'inline-flex' : 'none'; }
 
-/* ════════════════════════════════════════════════
-   ONLINE / OFFLINE
-   ════════════════════════════════════════════════ */
+/* ═══════════════ OFFLINE ═══════════════ */
 function updateOfflineBanner() {
   const banner = document.getElementById('offline-banner');
-  if (!navigator.onLine) {
-    banner.classList.add('show');
-    document.getElementById('app').style.paddingTop = '52px';
-  } else {
-    banner.classList.remove('show');
-    document.getElementById('app').style.paddingTop = '';
-  }
+  if (!navigator.onLine) { banner.classList.add('show'); document.getElementById('app').style.paddingTop = '52px'; }
+  else { banner.classList.remove('show'); document.getElementById('app').style.paddingTop = ''; }
 }
 window.addEventListener('online',  () => { updateOfflineBanner(); toast('success', 'Koneksi Kembali', 'Jaringan sudah terhubung kembali.'); });
 window.addEventListener('offline', () => { updateOfflineBanner(); saveSession(); toast('warn', 'Koneksi Terputus', 'Jawaban tersimpan otomatis.'); });
 
-/* ════════════════════════════════════════════════
-   STATE
-   ════════════════════════════════════════════════ */
-let coverData       = null;
-let logoDataUri     = '';
-let siswaAktif      = null;
-let modeManual      = false;
-let infoMapelData   = null;
-let soalList        = [];
-let jawaban         = {};
-let currentIdx      = 0;
-let submitCardShown = false;
-let timerInterval   = null;
-let readingDone     = false;
-let timerSisaDetik  = 15;
-let timerCekPeserta = null;
+/* ═══════════════ STATE ═══════════════ */
+let coverData = null, logoDataUri = '', siswaAktif = null, modeManual = false;
+let infoMapelData = null, soalList = [], jawaban = {}, currentIdx = 0;
+let submitCardShown = false, timerInterval = null, readingDone = false;
+let timerSisaDetik = 15, timerCekPeserta = null;
+let kodeMapelAktif = '', mataPelajaranAktif = '';
 
-// ══════════════════════════════════════════════════
-// FIX: Variabel global untuk menyimpan kode mapel
-//      dan mata pelajaran — tidak bergantung pada DOM
-// ══════════════════════════════════════════════════
-let kodeMapelAktif      = '';
-let mataPelajaranAktif  = '';
-
-/* ════════════════════════════════════════════════
-   GAS FETCH
-   ════════════════════════════════════════════════ */
+/* ═══════════════ GAS FETCH ═══════════════ */
 async function gasGet(action, params = {}) {
   const controller = new AbortController();
   const tid = setTimeout(() => controller.abort(), 15000);
@@ -981,75 +720,52 @@ async function gasGet(action, params = {}) {
   } finally { clearTimeout(tid); }
 }
 
-/* ════════════════════════════════════════════════
-   SPLASH
-   ════════════════════════════════════════════════ */
+/* ═══════════════ SPLASH ═══════════════ */
 let splashPct = 0;
 function setSplashProgress(pct, status) {
-  splashPct = pct;
-  document.getElementById('splash-progress').style.width = pct + '%';
+  splashPct = pct; document.getElementById('splash-progress').style.width = pct + '%';
   if (status) document.getElementById('splash-status').textContent = status;
 }
 function animateSplashTo(targetPct, duration, status, cb) {
   if (status) document.getElementById('splash-status').textContent = status;
-  const start = splashPct;
-  let startTime = null;
+  const start = splashPct; let startTime = null;
   function step(ts) {
     if (!startTime) startTime = ts;
     const p = Math.min((ts - startTime) / duration, 1);
     setSplashProgress(start + (targetPct - start) * (1 - Math.pow(1 - p, 3)));
-    if (p < 1) requestAnimationFrame(step);
-    else if (cb) cb();
+    if (p < 1) requestAnimationFrame(step); else if (cb) cb();
   }
   requestAnimationFrame(step);
 }
 function dismissSplash() {
-  const splash = document.getElementById('splash');
-  const app    = document.getElementById('app');
+  const splash = document.getElementById('splash'), app = document.getElementById('app');
   setTimeout(() => {
-    splash.classList.add('hide-out');
-    app.classList.add('visible');
+    splash.classList.add('hide-out'); app.classList.add('visible');
     setTimeout(() => { splash.style.display = 'none'; }, 700);
   }, 500);
 }
 
-/* ════════════════════════════════════════════════
-   ROOM LOADING
-   ════════════════════════════════════════════════ */
+/* ═══════════════ ROOM LOADING ═══════════════ */
 function showRoomLoading(label, fromCache = false) {
   document.getElementById('room-loader-label').textContent = label || 'Data';
-  document.getElementById('room-loader-sub-text').textContent =
-    fromCache ? 'Memuat dari cache lokal...' : 'Menghubungi server ujian...';
+  document.getElementById('room-loader-sub-text').textContent = fromCache ? 'Memuat dari cache lokal...' : 'Menghubungi server ujian...';
   const overlay = document.getElementById('room-loading-overlay');
-  overlay.classList.remove('show');
-  void overlay.offsetWidth;
-  const oldFill  = document.getElementById('room-loader-bar-fill');
-  const newFill  = oldFill.cloneNode(true);
+  overlay.classList.remove('show'); void overlay.offsetWidth;
+  const oldFill = document.getElementById('room-loader-bar-fill'), newFill = oldFill.cloneNode(true);
   oldFill.parentNode.replaceChild(newFill, oldFill);
-  const doorLeaf = document.querySelector('.door-leaf');
-  const doorClone = doorLeaf.cloneNode(true);
+  const doorLeaf = document.querySelector('.door-leaf'), doorClone = doorLeaf.cloneNode(true);
   doorLeaf.parentNode.replaceChild(doorClone, doorLeaf);
-  overlay.classList.add('show');
-  document.body.style.overflow = 'hidden';
+  overlay.classList.add('show'); document.body.style.overflow = 'hidden';
 }
 function hideRoomLoading() {
   const overlay = document.getElementById('room-loading-overlay');
-  overlay.style.transition = 'opacity 0.4s ease';
-  overlay.style.opacity    = '0';
-  setTimeout(() => {
-    overlay.classList.remove('show');
-    overlay.style.opacity    = '';
-    overlay.style.transition = '';
-    document.body.style.overflow = '';
-  }, 400);
+  overlay.style.transition = 'opacity 0.4s ease'; overlay.style.opacity = '0';
+  setTimeout(() => { overlay.classList.remove('show'); overlay.style.opacity = ''; overlay.style.transition = ''; document.body.style.overflow = ''; }, 400);
 }
 
-/* ════════════════════════════════════════════════
-   INIT
-   ════════════════════════════════════════════════ */
+/* ═══════════════ INIT ═══════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   updateOfflineBanner();
-
   document.getElementById('btn-cover-start').addEventListener('click', goHalPeserta);
   document.getElementById('btn-mulai').addEventListener('click', mulaiUjian);
   document.getElementById('btn-kirim').addEventListener('click', validasiKirim);
@@ -1058,63 +774,73 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('palette-close-btn').addEventListener('click', closePalette);
   document.getElementById('palette-handle-close').addEventListener('click', closePalette);
   document.getElementById('palette-overlay').addEventListener('click', closePaletteOnOverlay);
-
   const kodeMapelEl = document.getElementById('kode-mapel');
   kodeMapelEl.addEventListener('input', () => { kodeMapelEl.value = kodeMapelEl.value.toUpperCase(); });
   kodeMapelEl.addEventListener('blur', cekKodeMapel);
   document.getElementById('no-peserta').addEventListener('input', onNoPesertaInput);
   document.getElementById('pass-mulai').addEventListener('keydown', e => { if (e.key === 'Enter') mulaiUjian(); });
-
+  
+  // Password toggle buttons
+  document.getElementById('toggle-pass-mulai').addEventListener('click', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('pass-mulai');
+    const btn = document.getElementById('toggle-pass-mulai');
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁️';
+    }
+  });
+  
+  document.getElementById('toggle-pass-selesai').addEventListener('click', (e) => {
+    e.preventDefault();
+    const input = document.getElementById('pass-selesai');
+    const btn = document.getElementById('toggle-pass-selesai');
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁️';
+    }
+  });
+  
   window.addEventListener('beforeunload', () => { if (soalList.length > 0 && siswaAktif) saveSession(); });
-
   animateSplashTo(30, 400, 'Menghubungi server...', async () => {
     await muatCoverAwal();
-    animateSplashTo(100, 500, 'Siap!', () => {
-      dismissSplash();
-      renderCover();
-      renderCachePanel();
-    });
+    animateSplashTo(100, 500, 'Siap!', () => { dismissSplash(); renderCover(); renderCachePanel(); });
   });
 });
 
-/* ════════════════════════════════════════════════
-   MUAT COVER
-   ════════════════════════════════════════════════ */
+/* ═══════════════ COVER ═══════════════ */
 async function muatCoverAwal() {
   const cached = cacheGet('cover_main');
   if (cached) { coverData = cached.coverData; logoDataUri = cached.logoDataUri || ''; muatCoverBackground(); return; }
   try {
     const res = await gasGet('getCover');
-    coverData  = res.covers ? res.covers[0] : null;
+    coverData = res.covers ? res.covers[0] : null;
     if (coverData && coverData['logo']) {
       const fid = extractDriveId(coverData['logo']);
       if (fid) {
         const cachedLogo = cacheGet('logo_' + fid);
-        if (cachedLogo) {
-          logoDataUri = cachedLogo;
-        } else {
-          try {
-            const ir = await gasGet('proxyImage', { id: fid });
-            if (ir.success) { logoDataUri = ir.dataUri; cacheSet('logo_' + fid, ir.dataUri, CACHE_TTL.logo); }
-          } catch (_) {}
-        }
+        if (cachedLogo) { logoDataUri = cachedLogo; }
+        else { try { const ir = await gasGet('proxyImage', { id: fid }); if (ir.success) { logoDataUri = ir.dataUri; cacheSet('logo_' + fid, ir.dataUri, CACHE_TTL.logo); } } catch (_) {} }
       }
     }
     cacheSet('cover_main', { coverData, logoDataUri }, CACHE_TTL.cover);
   } catch (_) {}
 }
-
 async function muatCoverBackground() {
   try {
-    const res = await gasGet('getCover');
-    const freshCover = res.covers ? res.covers[0] : null;
-    if (!freshCover) return;
+    const res = await gasGet('getCover'); const freshCover = res.covers ? res.covers[0] : null; if (!freshCover) return;
     let freshLogo = logoDataUri;
     if (freshCover['logo']) {
       const fid = extractDriveId(freshCover['logo']);
       if (fid) {
-        const cachedLogo = cacheGet('logo_' + fid);
-        if (cachedLogo) { freshLogo = cachedLogo; }
+        const cl = cacheGet('logo_' + fid);
+        if (cl) { freshLogo = cl; }
         else { const ir = await gasGet('proxyImage', { id: fid }); if (ir.success) { freshLogo = ir.dataUri; cacheSet('logo_' + fid, ir.dataUri, CACHE_TTL.logo); } }
       }
     }
@@ -1122,52 +848,30 @@ async function muatCoverBackground() {
     coverData = freshCover; logoDataUri = freshLogo;
   } catch (_) {}
 }
-
 function renderCachePanel() {
-  const stats  = getCacheStats();
-  const panel  = document.getElementById('cache-panel');
-  const infoEl = document.getElementById('cache-panel-info');
-  if (stats.count > 0) {
-    panel.style.display = 'flex';
-    infoEl.innerHTML = 'Cache: <strong>' + stats.count + ' item</strong> · <strong>' + stats.kb + ' KB</strong>';
-  } else { panel.style.display = 'none'; }
+  const stats = getCacheStats(), panel = document.getElementById('cache-panel'), infoEl = document.getElementById('cache-panel-info');
+  if (stats.count > 0) { panel.style.display = 'flex'; infoEl.innerHTML = 'Cache: <strong>' + stats.count + ' item</strong> · <strong>' + stats.kb + ' KB</strong>'; }
+  else { panel.style.display = 'none'; }
 }
 function clearAllCache() {
-  showModal({ icon: '🗑', iconBg: '#fee2e2', title: 'Hapus Semua Cache?', sub: 'Data cover, logo, dan soal yang tersimpan lokal akan dihapus.', buttons: [{ label: 'Batal', cls: 'ghost' }, { label: 'Ya, Hapus', cls: 'danger', action: () => { clearAllCacheInternal(); renderCachePanel(); toast('info', 'Cache Dihapus', 'Semua data cache lokal telah dihapus.'); }}] });
+  showModal({ icon: '🗑', iconBg: '#fee2e2', title: 'Hapus Semua Cache?', sub: 'Data cover, logo, dan soal yang tersimpan lokal akan dihapus.', buttons: [{ label: 'Batal', cls: 'ghost' }, { label: 'Ya, Hapus', cls: 'danger', action: () => { clearAllCacheInternal(); renderCachePanel(); toast('info', 'Cache Dihapus', 'Semua data cache lokal telah dihapus.'); } }] });
 }
-
-/* ════════════════════════════════════════════════
-   COVER
-   ════════════════════════════════════════════════ */
 function renderCover() {
   if (coverData) {
     document.getElementById('cover-judul').textContent = coverData['judul'] || 'Ujian Online';
     document.getElementById('cover-tahun').textContent = coverData['tahun'] || '';
-    const el = document.getElementById('brand-title');
-    if (el) el.textContent = coverData['judul'] || 'Ujian Online';
+    const el = document.getElementById('brand-title'); if (el) el.textContent = coverData['judul'] || 'Ujian Online';
   }
-  ['cover-logo-img', 'brand-logo-img', 'splash-logo-img'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && logoDataUri) { el.src = logoDataUri; el.style.display = 'block'; }
-  });
-  if (logoDataUri) {
-    ['cover-logo-fallback', 'brand-logo-fallback', 'splash-logo-fallback'].forEach(id => {
-      const el = document.getElementById(id); if (el) el.style.display = 'none';
-    });
-  }
+  ['cover-logo-img','brand-logo-img','splash-logo-img'].forEach(id => { const el = document.getElementById(id); if (el && logoDataUri) { el.src = logoDataUri; el.style.display = 'block'; } });
+  if (logoDataUri) ['cover-logo-fallback','brand-logo-fallback','splash-logo-fallback'].forEach(id => { const el = document.getElementById(id); if (el) el.style.display = 'none'; });
   showPage('hal-cover');
 }
-
 function goHalPeserta() { showPage('hal-peserta'); document.getElementById('no-peserta').focus(); }
 
-/* ════════════════════════════════════════════════
-   CEK PESERTA
-   ════════════════════════════════════════════════ */
+/* ═══════════════ CEK PESERTA ═══════════════ */
 function onNoPesertaInput() {
-  const no       = document.getElementById('no-peserta').value.trim();
-  const infoEl   = document.getElementById('info-peserta');
-  const detailEl = document.getElementById('siswa-detail');
-  const manualEl = document.getElementById('manual-wrap');
+  const no = document.getElementById('no-peserta').value.trim();
+  const infoEl = document.getElementById('info-peserta'), detailEl = document.getElementById('siswa-detail'), manualEl = document.getElementById('manual-wrap');
   infoEl.className = 'info-row'; infoEl.innerHTML = '';
   detailEl.style.display = 'none'; manualEl.style.display = 'none';
   siswaAktif = null; modeManual = false;
@@ -1185,70 +889,51 @@ function onNoPesertaInput() {
         document.getElementById('sd-sekolah').textContent = res.peserta['sekolah'] || '—';
         detailEl.style.display = 'block'; modeManual = false;
       } else {
-        infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Username tidak terdaftar';
-       // manualEl.style.display = 'block';
-       modeManual = false;
+        infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Username tidak terdaftar'; modeManual = false;
       }
     } catch (_) { infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Gagal mengecek — periksa koneksi'; }
   }, 700);
 }
 
-/* ════════════════════════════════════════════════
-   CEK KODE MAPEL
-   ════════════════════════════════════════════════ */
+/* ═══════════════ CEK KODE MAPEL ═══════════════ */
 async function cekKodeMapel() {
-  const kode   = document.getElementById('kode-mapel').value.trim();
-  const infoEl = document.getElementById('info-mapel');
-  const boxEl  = document.getElementById('mapel-info-box');
-  infoEl.className = 'info-row'; infoEl.innerHTML = '';
-  boxEl.style.display = 'none'; infoMapelData = null;
+  const kode = document.getElementById('kode-mapel').value.trim();
+  const infoEl = document.getElementById('info-mapel'), boxEl = document.getElementById('mapel-info-box');
+  infoEl.className = 'info-row'; infoEl.innerHTML = ''; boxEl.style.display = 'none'; infoMapelData = null;
   if (!kode) return;
   const cachedMapel = cacheGet('mapel_' + kode);
   if (cachedMapel && cachedMapel.success) {
     infoMapelData = cachedMapel;
     infoEl.className = 'info-row ok'; infoEl.innerHTML = '✓ Kode ditemukan <span style="font-size:10px;color:var(--muted);font-weight:500">(cache)</span>';
-    document.getElementById('mi-nama').textContent = cachedMapel.mataPelajaran || '—';
-    boxEl.style.display = 'block'; return;
+    document.getElementById('mi-nama').textContent = cachedMapel.mataPelajaran || '—'; boxEl.style.display = 'block'; return;
   }
   infoEl.className = 'info-row load'; infoEl.innerHTML = '⏳ Memeriksa kode mata pelajaran...';
   try {
     const res = await gasGet('getInfoMapel', { kode });
     if (res.success) {
-      infoMapelData = res;
-      infoEl.className = 'info-row ok'; infoEl.innerHTML = '✓ Kode ditemukan';
-      document.getElementById('mi-nama').textContent = res.mataPelajaran || '—';
-      boxEl.style.display = 'block'; cacheSet('mapel_' + kode, res, CACHE_TTL.mapel);
-    } else {
-      infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ ' + (res.message || 'Kode tidak ditemukan');
-    }
+      infoMapelData = res; infoEl.className = 'info-row ok'; infoEl.innerHTML = '✓ Kode ditemukan';
+      document.getElementById('mi-nama').textContent = res.mataPelajaran || '—'; boxEl.style.display = 'block'; cacheSet('mapel_' + kode, res, CACHE_TTL.mapel);
+    } else { infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ ' + (res.message || 'Kode tidak ditemukan'); }
   } catch (_) { infoEl.className = 'info-row err'; infoEl.innerHTML = '✕ Gagal mengecek — periksa koneksi'; }
 }
 
-/* ════════════════════════════════════════════════
-   MULAI UJIAN
-   ════════════════════════════════════════════════ */
+/* ═══════════════ MULAI UJIAN ═══════════════ */
 async function mulaiUjian() {
   if (modeManual) {
-    const nm = document.getElementById('manual-nama').value.trim();
-    const kl = document.getElementById('manual-kelas').value.trim();
-    const sk = document.getElementById('manual-sekolah').value.trim();
+    const nm = document.getElementById('manual-nama').value.trim(), kl = document.getElementById('manual-kelas').value.trim(), sk = document.getElementById('manual-sekolah').value.trim();
     if (!nm) return toast('error', 'Nama Wajib Diisi', 'Isi nama pada form manual.');
     if (!kl) return toast('error', 'Kelas Wajib Diisi', 'Isi kelas pada form manual.');
     siswaAktif = { 'no peserta': document.getElementById('no-peserta').value.trim() || '-', 'nama': nm, 'kelas': kl, 'sekolah': sk };
-  } else {
-    if (!siswaAktif) return toast('error', 'Peserta Tidak Valid', 'Masukkan username yang terdaftar.');
-  }
+  } else { if (!siswaAktif) return toast('error', 'Peserta Tidak Valid', 'Masukkan username yang terdaftar.'); }
   const kode = document.getElementById('kode-mapel').value.trim();
   if (!kode) return toast('warn', 'Kode Mapel Kosong', 'Isi kode mata pelajaran.');
   if (!infoMapelData) { await cekKodeMapel(); if (!infoMapelData) return; }
   const password = document.getElementById('pass-mulai').value;
   if (!password) return toast('warn', 'Password Kosong', 'Masukkan password mulai dari pengawas.');
-
   const no = siswaAktif['no peserta'] || '';
   const savedSesi = loadSession(no, kode);
   if (savedSesi && savedSesi.soalList && savedSesi.soalList.length > 0) {
-    const answered = Object.keys(savedSesi.jawaban || {}).length;
-    const total    = savedSesi.soalList.length;
+    const answered = Object.keys(savedSesi.jawaban || {}).length, total = savedSesi.soalList.length;
     showModal({
       icon: '🔄', iconBg: '#dcfce7', title: 'Sesi Ujian Ditemukan!',
       sub: 'Ada jawaban yang tersimpan untuk <strong>' + (savedSesi.siswaAktif?.nama || no) + '</strong>.<br><strong>' + answered + ' dari ' + total + ' soal</strong> sudah dijawab.<br><small style="color:var(--muted)">Disimpan pukul ' + (savedSesi.savedAt || '—') + '</small><br><br>Lanjutkan dari sesi sebelumnya?',
@@ -1262,79 +947,59 @@ async function mulaiUjian() {
   prosesLogin(kode, password);
 }
 
-/* ════════════════════════════════════════════════
-   RESTORE SESI
-   ════════════════════════════════════════════════ */
+/* ═══════════════ RESTORE SESI ═══════════════ */
 function restoreSession(sesi) {
   soalList = sesi.soalList; jawaban = sesi.jawaban || {};
   currentIdx = Math.min(sesi.currentIdx || 0, soalList.length - 1);
   siswaAktif = sesi.siswaAktif || siswaAktif; submitCardShown = false;
-
-  // FIX: Simpan ke variabel global saat restore sesi
-  kodeMapelAktif     = sesi.kodeMapel || '';
-  mataPelajaranAktif = sesi.mataPelajaran || sesi.kodeMapel || '';
-
+  kodeMapelAktif = sesi.kodeMapel || ''; mataPelajaranAktif = sesi.mataPelajaran || sesi.kodeMapel || '';
   document.getElementById('txt-nama-siswa').textContent = siswaAktif['nama'] || '';
   document.getElementById('txt-info-siswa').textContent = (siswaAktif['kelas'] || '') + (siswaAktif['sekolah'] ? ' · ' + siswaAktif['sekolah'] : '');
   document.getElementById('txt-mapel-badge').textContent = mataPelajaranAktif;
-  const sc = document.getElementById('submit-card');
-  sc.classList.remove('show', 'animate-in');
+  const sc = document.getElementById('submit-card'); sc.classList.remove('show', 'animate-in');
   document.getElementById('pass-selesai').value = '';
-  showSessionChip(true);
-  renderPalette(); showPage('hal-soal'); renderQuestion(currentIdx);
+  showSessionChip(true); renderPalette(); showPage('hal-soal'); renderQuestion(currentIdx);
   window.scrollTo(0, 0);
   toast('success', '▶ Sesi Dilanjutkan', Object.keys(jawaban).length + ' jawaban berhasil dipulihkan.');
 }
 
-/* ════════════════════════════════════════════════
-   PROSES LOGIN — fetch soal dari GAS
-   ════════════════════════════════════════════════ */
+/* ═══════════════ PROSES LOGIN ═══════════════ */
 async function prosesLogin(kode, password) {
   const btn = document.getElementById('btn-mulai');
   btn.disabled = true; btn.innerHTML = '<div class="spinner"></div> Memuat soal...';
   try {
     const res = await gasGet('getSoal', { kode, password });
-    if (!res.success) {
-      toast('error', 'Gagal', res.message || 'Tidak dapat memuat soal.');
-      btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian'; return;
-    }
+    if (!res.success) { toast('error', 'Gagal', res.message || 'Tidak dapat memuat soal.'); btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian'; return; }
     soalList = acakSoal(res.soalList || []); jawaban = {}; currentIdx = 0; submitCardShown = false;
-    if (soalList.length === 0) {
-      toast('warn', 'Soal Kosong', 'Tidak ada soal untuk mata pelajaran ini.');
-      btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian'; return;
-    }
-
-    // FIX: Simpan ke variabel global segera setelah login berhasil
-    kodeMapelAktif     = kode;
-    mataPelajaranAktif = res.mataPelajaran || kode;
-
+    if (soalList.length === 0) { toast('warn', 'Soal Kosong', 'Tidak ada soal untuk mata pelajaran ini.'); btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian'; return; }
+    kodeMapelAktif = kode; mataPelajaranAktif = res.mataPelajaran || kode;
     document.getElementById('txt-nama-siswa').textContent = siswaAktif['nama'] || '';
     document.getElementById('txt-info-siswa').textContent = (siswaAktif['kelas'] || '') + (siswaAktif['sekolah'] ? ' · ' + siswaAktif['sekolah'] : '');
     document.getElementById('txt-mapel-badge').textContent = mataPelajaranAktif;
-    const sc = document.getElementById('submit-card');
-    sc.classList.remove('show', 'animate-in');
+    const sc = document.getElementById('submit-card'); sc.classList.remove('show', 'animate-in');
     document.getElementById('pass-selesai').value = '';
     showSessionChip(false); renderPalette(); showPage('hal-soal'); renderQuestion(0);
-    window.scrollTo(0, 0);
-    toast('success', 'Ujian Dimulai!', soalList.length + ' soal siap dikerjakan.');
-  } catch (_) {
-    toast('error', 'Gagal Memuat Soal', 'Terjadi kesalahan koneksi.');
-    btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian';
-  }
+    window.scrollTo(0, 0); toast('success', 'Ujian Dimulai!', soalList.length + ' soal siap dikerjakan.');
+  } catch (_) { toast('error', 'Gagal Memuat Soal', 'Terjadi kesalahan koneksi.'); btn.disabled = false; btn.innerHTML = 'Masuk ke Ruang Ujian'; }
 }
 
-/* ════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════
    ACAK SOAL
-   ════════════════════════════════════════════════ */
+   FIX: Simpan _noAsli (nomor soal asli dari GAS)
+   sebelum diacak. Key ini dipakai saat kirim jawaban
+   agar cocok dengan kunci jawaban di sheet GAS.
+   ═══════════════════════════════════════════════════ */
 function acakSoal(list) {
   if (!list || list.length === 0) return [];
   const shuffle = arr => arr.sort(() => Math.random() - 0.5);
-  list = list.map(s => {
+  list = list.map((s, originalIndex) => {
     if (!s.pilihan) s.pilihan = [];
     if (!Array.isArray(s.pilihan)) {
       s.pilihan = Object.entries(s.pilihan).filter(([, v]) => v)
         .map(([k, v]) => ({ huruf: k, teks: String(v), gambar: '' }));
     }
+    // *** FIX: simpan nomor asli dari GAS sebelum diacak ***
+    s._noAsli = s.no || (originalIndex + 1);
     return s;
   });
   const jml   = s => Array.isArray(s.pilihan) ? s.pilihan.length : 0;
@@ -1345,33 +1010,24 @@ function acakSoal(list) {
   return [...soal5, ...soal4, ...soal2, ...lain];
 }
 
-/* ════════════════════════════════════════════════
-   RENDER SOAL
-   ════════════════════════════════════════════════ */
+/* ═══════════════ RENDER SOAL ═══════════════ */
 function rawToHtml(s) {
-  return parseMath(String(s || ''))
-    .replace(/&(?!amp;|lt;|gt;|quot;|#)/g, '&amp;')
-    .replace(/\n/g, '<br>');
+  return parseMath(String(s || '')).replace(/&(?!amp;|lt;|gt;|quot;|#)/g, '&amp;').replace(/\n/g, '<br>');
 }
-
 function renderQuestion(idx) {
   currentIdx = idx;
   const s = soalList[idx];
   let pilihan = [];
-  if (Array.isArray(s.pilihan) && s.pilihan.length > 0) {
-    pilihan = s.pilihan.filter(opt => opt && opt.huruf);
-  } else if (s.pilihan && typeof s.pilihan === 'object') {
-    pilihan = Object.entries(s.pilihan).filter(([, v]) => v).map(([k, v]) => ({ huruf: k, teks: String(v), gambar: '' }));
-  }
+  if (Array.isArray(s.pilihan) && s.pilihan.length > 0) { pilihan = s.pilihan.filter(opt => opt && opt.huruf); }
+  else if (s.pilihan && typeof s.pilihan === 'object') { pilihan = Object.entries(s.pilihan).filter(([, v]) => v).map(([k, v]) => ({ huruf: k, teks: String(v), gambar: '' })); }
   if (pilihan.length === 0) {
     ['A','B','C','D','E','F','G','H','I','J','K','L'].forEach(h => {
-      const teks   = String(s['opt_' + h] || s['opt_' + h.toLowerCase()] || '').trim();
+      const teks = String(s['opt_' + h] || s['opt_' + h.toLowerCase()] || '').trim();
       const gambar = String(s['gambar opt_' + h] || s['gambar opt_' + h.toLowerCase()] || '').trim();
       if (teks || gambar) pilihan.push({ huruf: h, teks, gambar });
     });
   }
-  const soalTeks   = s.soal || s.Soal || '';
-  const gambarSoal = s.gambarSoal || s.Img_Soal || '';
+  const soalTeks = s.soal || s.Soal || '', gambarSoal = s.gambarSoal || s.Img_Soal || '';
   const card = document.getElementById('q-card');
   card.innerHTML =
     '<div class="q-number-tag">Soal ' + (idx + 1) + ' dari ' + soalList.length + '</div>' +
@@ -1383,9 +1039,7 @@ function renderQuestion(idx) {
     optList.innerHTML = '<div style="color:var(--danger);font-size:13px;padding:12px 0">⚠ Pilihan jawaban tidak tersedia untuk soal ini.</div>';
   } else {
     pilihan.forEach(opt => {
-      const huruf = String(opt.huruf || '').trim();
-      const teks  = String(opt.teks  || '').trim();
-      const gambar = String(opt.gambar || '').trim();
+      const huruf = String(opt.huruf || '').trim(), teks = String(opt.teks || '').trim(), gambar = String(opt.gambar || '').trim();
       const wrapper = document.createElement('div'); wrapper.className = 'option-item';
       const radio = document.createElement('input'); radio.type = 'radio'; radio.name = 'soal_q'; radio.id = 'opt_' + huruf; radio.value = huruf; radio.checked = (jawaban[idx] === huruf);
       radio.addEventListener('change', () => pilihJawaban(huruf));
@@ -1393,8 +1047,7 @@ function renderQuestion(idx) {
       const keySpan = document.createElement('span'); keySpan.className = 'opt-key'; keySpan.textContent = huruf;
       const txtSpan = document.createElement('span'); txtSpan.className = 'opt-text'; txtSpan.innerHTML = rawToHtml(teks);
       if (gambar) {
-        const img = document.createElement('img'); img.setAttribute('data-src', gambar); img.className = 'opt-img';
-        img.style.cssText = 'min-height:50px;background:var(--bg);display:block;margin-top:8px';
+        const img = document.createElement('img'); img.setAttribute('data-src', gambar); img.className = 'opt-img'; img.style.cssText = 'min-height:50px;background:var(--bg);display:block;margin-top:8px';
         txtSpan.appendChild(document.createElement('br')); txtSpan.appendChild(img);
       }
       lbl.appendChild(keySpan); lbl.appendChild(txtSpan); wrapper.appendChild(radio); wrapper.appendChild(lbl); optList.appendChild(wrapper);
@@ -1404,12 +1057,9 @@ function renderQuestion(idx) {
   window.scrollTo({ top: document.getElementById('hal-soal').offsetTop - 20, behavior: 'smooth' });
 }
 
-/* ════════════════════════════════════════════════
-   NAV BUTTONS
-   ════════════════════════════════════════════════ */
+/* ═══════════════ NAV ═══════════════ */
 function renderNav() {
-  const navEl = document.getElementById('nav-btns');
-  const isFirst = currentIdx === 0; const isLast = currentIdx === soalList.length - 1;
+  const navEl = document.getElementById('nav-btns'), isFirst = currentIdx === 0, isLast = currentIdx === soalList.length - 1;
   navEl.innerHTML = '';
   const prevBtn = document.createElement('button'); prevBtn.className = 'btn-nav'; prevBtn.textContent = '← Sebelumnya'; prevBtn.disabled = isFirst;
   prevBtn.addEventListener('click', () => goTo(currentIdx - 1)); navEl.appendChild(prevBtn);
@@ -1419,29 +1069,23 @@ function renderNav() {
   nextBtn.addEventListener('click', () => goToNext()); navEl.appendChild(nextBtn);
 }
 
-/* ════════════════════════════════════════════════
-   TIMER MEMBACA
-   ════════════════════════════════════════════════ */
+/* ═══════════════ TIMER ═══════════════ */
 function mulaiTimer() {
   clearInterval(timerInterval); timerSisaDetik = 15; readingDone = false;
-  const barEl = document.getElementById('timer-bar'); const fillEl = document.getElementById('timer-bar-fill');
-  const countEl = document.getElementById('timer-countdown'); const labelEl = document.getElementById('timer-label'); const iconEl = document.getElementById('timer-icon');
+  const barEl = document.getElementById('timer-bar'), fillEl = document.getElementById('timer-bar-fill');
+  const countEl = document.getElementById('timer-countdown'), labelEl = document.getElementById('timer-label'), iconEl = document.getElementById('timer-icon');
   const timerForIdx = currentIdx;
-  barEl.className = 'timer-bar reading'; labelEl.textContent = 'Waktu Membaca — pilihan jawaban terkunci';
-  labelEl.className = 'timer-label reading-mode'; iconEl.textContent = '🔒';
+  barEl.className = 'timer-bar reading'; labelEl.textContent = 'Waktu Membaca — pilihan jawaban terkunci'; labelEl.className = 'timer-label reading-mode'; iconEl.textContent = '🔒';
   countEl.textContent = '15'; countEl.className = 'timer-countdown'; fillEl.style.width = '100%';
-  const optListEl = document.getElementById('option-list');
-  if (optListEl) optListEl.classList.add('options-blocker');
+  const optListEl = document.getElementById('option-list'); if (optListEl) optListEl.classList.add('options-blocker');
   timerInterval = setInterval(() => {
     if (currentIdx !== timerForIdx) { clearInterval(timerInterval); return; }
     timerSisaDetik--;
-    fillEl.style.width = ((timerSisaDetik / 15) * 100) + '%';
-    countEl.textContent = timerSisaDetik;
+    fillEl.style.width = ((timerSisaDetik / 15) * 100) + '%'; countEl.textContent = timerSisaDetik;
     if (timerSisaDetik <= 5) countEl.className = 'timer-countdown warning';
     if (timerSisaDetik <= 0) {
       clearInterval(timerInterval); readingDone = true;
-      const freshOptList = document.getElementById('option-list');
-      if (freshOptList) freshOptList.classList.remove('options-blocker');
+      const freshOptList = document.getElementById('option-list'); if (freshOptList) freshOptList.classList.remove('options-blocker');
       barEl.className = 'timer-bar active'; labelEl.textContent = 'Pilih jawaban Anda'; labelEl.className = 'timer-label';
       iconEl.textContent = '✍️'; countEl.textContent = '✓'; countEl.className = 'timer-countdown';
       fillEl.style.background = 'var(--success)'; fillEl.style.width = '100%';
@@ -1449,9 +1093,7 @@ function mulaiTimer() {
   }, 1000);
 }
 
-/* ════════════════════════════════════════════════
-   JAWABAN & PALETTE
-   ════════════════════════════════════════════════ */
+/* ═══════════════ JAWABAN & PALETTE ═══════════════ */
 function pilihJawaban(val) {
   if (!readingDone) return;
   jawaban[currentIdx] = val; updatePalette(); saveSession();
@@ -1469,8 +1111,7 @@ function renderPalette() {
   const grid = document.getElementById('q-palette-grid'); grid.innerHTML = '';
   soalList.forEach((_, i) => {
     const el = document.createElement('div'); el.className = 'q-num'; el.id = 'qn-' + i; el.textContent = i + 1;
-    el.addEventListener('click', () => { closePalette(); setTimeout(() => goTo(i), 100); });
-    grid.appendChild(el);
+    el.addEventListener('click', () => { closePalette(); setTimeout(() => goTo(i), 100); }); grid.appendChild(el);
   });
   updatePalette();
 }
@@ -1481,7 +1122,7 @@ function updatePalette() {
     if (jawaban[i] !== undefined) el.classList.add('answered');
     if (i === currentIdx) el.classList.add('current');
   });
-  const answered = Object.keys(jawaban).length; const total = soalList.length;
+  const answered = Object.keys(jawaban).length, total = soalList.length;
   const pct = total > 0 ? ((answered / total) * 100).toFixed(0) : 0;
   document.getElementById('progress-fill').style.width       = pct + '%';
   document.getElementById('progress-count').textContent      = answered + ' / ' + total;
@@ -1502,73 +1143,60 @@ function cekTampilSubmit(answered, total) {
       }));
     }
   } else {
-    if (submitCardShown) {
-      submitCardShown = false; card.classList.remove('animate-in');
-      setTimeout(() => card.classList.remove('show'), 450);
-    }
+    if (submitCardShown) { submitCardShown = false; card.classList.remove('animate-in'); setTimeout(() => card.classList.remove('show'), 450); }
   }
 }
 function togglePalette() { document.getElementById('palette-overlay').classList.contains('show') ? closePalette() : openPalette(); }
-function openPalette() { document.getElementById('palette-overlay').classList.add('show'); document.getElementById('palette-toggle-bar').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function openPalette()  { document.getElementById('palette-overlay').classList.add('show'); document.getElementById('palette-toggle-bar').classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closePalette() { document.getElementById('palette-overlay').classList.remove('show'); document.getElementById('palette-toggle-bar').classList.remove('open'); document.body.style.overflow = ''; }
 function closePaletteOnOverlay(e) { if (e.target === document.getElementById('palette-overlay')) closePalette(); }
 
-/* ════════════════════════════════════════════════
-   NAVIGASI
-   ════════════════════════════════════════════════ */
+/* ═══════════════ NAVIGASI ═══════════════ */
 function goTo(idx) { if (idx < 0 || idx >= soalList.length) return; saveSession(); renderQuestion(idx); }
 function goToNext() {
   if (jawaban[currentIdx] === undefined) { toast('warn', 'Belum Dijawab', 'Pilih jawaban terlebih dahulu, atau gunakan tombol Lewati.'); return; }
-  if (currentIdx < soalList.length - 1) goTo(currentIdx + 1);
-  else toast('info', 'Soal Terakhir', 'Kamu sudah di soal terakhir.');
+  if (currentIdx < soalList.length - 1) goTo(currentIdx + 1); else toast('info', 'Soal Terakhir', 'Kamu sudah di soal terakhir.');
 }
 
-/* ════════════════════════════════════════════════
-   VALIDASI SUBMIT
-   ════════════════════════════════════════════════ */
+/* ═══════════════ VALIDASI SUBMIT ═══════════════ */
 function validasiKirim() {
   const passInput = document.getElementById('pass-selesai').value;
   if (!passInput) return toast('warn', 'Password Kosong', 'Masukkan password selesai dari pengawas.');
   const unanswered = soalList.length - Object.keys(jawaban).length;
-  const msg = unanswered > 0
-    ? 'Masih ada <strong>' + unanswered + ' soal</strong> belum dijawab. Tetap kirim?'
-    : 'Semua soal telah dijawab. Konfirmasi pengiriman?';
+  const msg = unanswered > 0 ? 'Masih ada <strong>' + unanswered + ' soal</strong> belum dijawab. Tetap kirim?' : 'Semua soal telah dijawab. Konfirmasi pengiriman?';
   showModal({
-    icon: unanswered > 0 ? '⚠️' : '📤',
-    iconBg: unanswered > 0 ? '#fef3c7' : '#dbeafe',
-    title: unanswered > 0 ? 'Ada Soal Belum Dijawab' : 'Kirim Jawaban?',
-    sub: msg,
-    buttons: [
-      { label: 'Batal',              cls: 'ghost' },
-      { label: 'Ya, Kirim Sekarang', cls: 'primary', action: kirimKeFirebase },
-    ],
+    icon: unanswered > 0 ? '⚠️' : '📤', iconBg: unanswered > 0 ? '#fef3c7' : '#dbeafe',
+    title: unanswered > 0 ? 'Ada Soal Belum Dijawab' : 'Kirim Jawaban?', sub: msg,
+    buttons: [{ label: 'Batal', cls: 'ghost' }, { label: 'Ya, Kirim Sekarang', cls: 'primary', action: kirimKeFirebase }],
   });
 }
 
-/* ════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════
    KIRIM KE FIREBASE
-   FIX: Gunakan kodeMapelAktif & mataPelajaranAktif
-        (variabel global) — bukan DOM field
-   ════════════════════════════════════════════════ */
+   FIX UTAMA: jawabanMap menggunakan soal._noAsli
+   (nomor soal asli di sheet GAS) sebagai key,
+   bukan urutan tampil setelah soal diacak.
+   Ini memastikan GAS bisa mencocokkan jawaban
+   dengan kunci jawaban yang benar.
+   ═══════════════════════════════════════════════════════ */
 async function kirimKeFirebase() {
   const btn = document.getElementById('btn-kirim');
   btn.disabled = true;
-
   const passInput     = document.getElementById('pass-selesai').value;
-
-  // FIX: Ambil dari variabel global, bukan dari DOM
   const kode          = kodeMapelAktif;
   const mataPelajaran = mataPelajaranAktif;
   const waktuSubmit   = new Date().toISOString();
-
-  // Guard: pastikan kode tidak kosong
   if (!kode) {
     toast('error', 'Kode Mapel Tidak Ditemukan', 'Terjadi kesalahan internal. Muat ulang halaman dan coba lagi.');
     btn.disabled = false; btn.innerHTML = '🔥 Kirim Semua Jawaban ke Firebase'; return;
   }
 
+  // *** FIX UTAMA: gunakan _noAsli sebagai key jawaban ***
   const jawabanMap = {};
-  soalList.forEach((_, i) => { jawabanMap[String(i + 1)] = jawaban[i] || ''; });
+  soalList.forEach((soal, i) => {
+    const noAsli = String(soal._noAsli || soal.no || (i + 1));
+    jawabanMap[noAsli] = jawaban[i] || '';
+  });
 
   btn.innerHTML = '<div class="spinner"></div> Memverifikasi & menghitung nilai...';
   let nilaiRes;
@@ -1589,38 +1217,25 @@ async function kirimKeFirebase() {
     toast('error', 'Gagal Verifikasi', 'Tidak bisa terhubung ke server. Coba lagi.');
     btn.disabled = false; btn.innerHTML = '🔥 Kirim Semua Jawaban ke Firebase'; return;
   }
-
   if (!nilaiRes.success) {
     toast('error', 'Ditolak Server', nilaiRes.message || 'Password salah atau kode mapel tidak valid.');
     btn.disabled = false; btn.innerHTML = '🔥 Kirim Semua Jawaban ke Firebase'; return;
   }
-
   const nilai = nilaiRes.nilai !== undefined ? nilaiRes.nilai : null;
   const benar = nilaiRes.benar !== undefined ? nilaiRes.benar : null;
   const total = nilaiRes.total !== undefined ? nilaiRes.total : soalList.length;
-
   btn.innerHTML = '<div class="spinner"></div> Menyimpan ke Firebase...';
-
   if (!window._fbKit) {
     toast('error', 'Firebase Belum Siap', 'Tunggu sebentar lalu coba lagi.');
     btn.disabled = false; btn.innerHTML = '🔥 Kirim Semua Jawaban ke Firebase'; return;
   }
-
   const dokFirestore = {
-    noPeserta    : siswaAktif['no peserta'] || '',
-    nama         : siswaAktif['nama'] || '',
-    kelas        : siswaAktif['kelas'] || '',
-    sekolah      : siswaAktif['sekolah'] || '',
-    kodeMapel    : kode,
-    mataPelajaran,
-    jawaban      : jawabanMap,
-    nilai        : nilai !== null ? nilai : 0,
-    benar        : benar !== null ? benar : 0,
-    total,
-    waktuSubmit,
-    kunciJawaban : nilaiRes.kunciJawaban || {},  // ← tambahkan ini
+    noPeserta: siswaAktif['no peserta'] || '', nama: siswaAktif['nama'] || '',
+    kelas: siswaAktif['kelas'] || '', sekolah: siswaAktif['sekolah'] || '',
+    kodeMapel: kode, mataPelajaran, jawaban: jawabanMap,
+    nilai: nilai !== null ? nilai : 0, benar: benar !== null ? benar : 0,
+    total, waktuSubmit, kunciJawaban: nilaiRes.kunciJawaban || {},
   };
-
   let docId;
   try {
     docId = await window._fbKit.simpanHasil(dokFirestore);
@@ -1630,39 +1245,25 @@ async function kirimKeFirebase() {
     await fallbackGasSimpan(jawabanMap, passInput, kode, mataPelajaran, waktuSubmit, nilai, benar, total);
     btn.disabled = false; btn.innerHTML = '🔥 Kirim Semua Jawaban ke Firebase'; return;
   }
-
-  clearInterval(timerInterval);
-  clearSession();
-
+  clearInterval(timerInterval); clearSession();
   showModal({
-    icon   : '🎉',
-    iconBg : '#dcfce7',
-    title  : 'Jawaban Terkirim!',
-    sub    :
-      '<strong>' + (siswaAktif['nama'] || '') + '</strong><br>' +
+    icon: '🎉', iconBg: '#dcfce7', title: 'Jawaban Terkirim!',
+    sub: '<strong>' + (siswaAktif['nama'] || '') + '</strong><br>' +
       'Nilai Anda: <span style="font-size:28px;font-weight:900;color:var(--success)">' + (nilai !== null ? nilai : '—') + '</span>' +
       '<br><small style="color:var(--muted)">' + (benar !== null ? benar : '—') + ' benar dari ' + total + ' soal</small>' +
-      '<br><br>' +
-      '<span style="font-size:11px;background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:99px;font-weight:700">🔥 Firebase · ID: ' + docId.slice(0, 8) + '…</span>',
+      '<br><br><span style="font-size:11px;background:#dcfce7;color:#16a34a;padding:4px 10px;border-radius:99px;font-weight:700">🔥 Firebase · ID: ' + docId.slice(0, 8) + '…</span>',
     buttons: [{ label: 'Selesai', cls: 'success', action: () => location.reload() }],
   });
 }
 
-/* ════════════════════════════════════════════════
-   FALLBACK — jika Firestore gagal, kirim via GAS
-   ════════════════════════════════════════════════ */
+/* ═══════════════ FALLBACK GAS ═══════════════ */
 async function fallbackGasSimpan(jawabanMap, passInput, kode, mataPelajaran, waktuSubmit, nilai, benar, total) {
   try {
     const payload = {
-      noPeserta      : siswaAktif['no peserta'] || '',
-      nama           : siswaAktif['nama'] || '',
-      kelas          : siswaAktif['kelas'] || '',
-      sekolah        : siswaAktif['sekolah'] || '',
-      kodeMapel      : kode,
-      mataPelajaran,
-      passwordSelesai: passInput,
-      jawaban        : JSON.stringify(jawabanMap),
-      waktuSubmit,
+      noPeserta: siswaAktif['no peserta'] || '', nama: siswaAktif['nama'] || '',
+      kelas: siswaAktif['kelas'] || '', sekolah: siswaAktif['sekolah'] || '',
+      kodeMapel: kode, mataPelajaran, passwordSelesai: passInput,
+      jawaban: JSON.stringify(jawabanMap), waktuSubmit,
     };
     await fetch(GAS_URL + '?action=rekapJawaban&payload=' + encodeURIComponent(JSON.stringify(payload)));
     clearInterval(timerInterval); clearSession();
@@ -1674,14 +1275,10 @@ async function fallbackGasSimpan(jawabanMap, passInput, kode, mataPelajaran, wak
         '<br><small style="color:var(--warn)">⚠ Disimpan via Google Sheets (Firebase offline)</small>',
       buttons: [{ label: 'Selesai', cls: 'primary', action: () => location.reload() }],
     });
-  } catch (_) {
-    toast('error', 'Semua Jalur Gagal', 'Hubungi pengawas segera — catat jawaban Anda.');
-  }
+  } catch (_) { toast('error', 'Semua Jalur Gagal', 'Hubungi pengawas segera — catat jawaban Anda.'); }
 }
 
-/* ════════════════════════════════════════════════
-   IMAGE CACHE
-   ════════════════════════════════════════════════ */
+/* ═══════════════ IMAGE CACHE ═══════════════ */
 const IMG_MEM_MAX = 60;
 const imgMemCache = new Map();
 function imgMemSet(key, val) {
@@ -1699,9 +1296,8 @@ function loadImagesOnCard() {
     if (/^https?:\/\//i.test(rawUrl)) {
       img.src = rawUrl; img.removeAttribute('data-src'); img.style.minHeight = '';
       img.onerror = () => { const fid = extractDriveId(rawUrl); if (fid) fetchProxyImage(img, rawUrl, fid); };
-    } else if (rawUrl.startsWith('data:')) {
-      img.src = rawUrl; img.removeAttribute('data-src'); img.style.minHeight = '';
-    } else { const fid = extractDriveId(rawUrl); if (fid) fetchProxyImage(img, rawUrl, fid); }
+    } else if (rawUrl.startsWith('data:')) { img.src = rawUrl; img.removeAttribute('data-src'); img.style.minHeight = ''; }
+    else { const fid = extractDriveId(rawUrl); if (fid) fetchProxyImage(img, rawUrl, fid); }
   });
 }
 async function fetchProxyImage(imgEl, cacheKey, fileId) {
@@ -1722,49 +1318,36 @@ function extractDriveId(url) {
   return null;
 }
 
-/* ════════════════════════════════════════════════
-   TOAST
-   ════════════════════════════════════════════════ */
+/* ═══════════════ TOAST ═══════════════ */
 function toast(type, title, msg, duration = 4000) {
   const icons = { success: '✓', error: '✕', info: 'i', warn: '!' };
-  const tc = document.getElementById('toast-container');
-  const el = document.createElement('div'); el.className = 'toast';
-  el.innerHTML = '<div class="toast-icon ' + type + '">' + (icons[type] || 'i') + '</div>' +
-    '<div class="toast-body"><div class="t-title">' + title + '</div>' + (msg ? '<div class="t-msg">' + msg + '</div>' : '') + '</div>';
+  const tc = document.getElementById('toast-container'), el = document.createElement('div'); el.className = 'toast';
+  el.innerHTML = '<div class="toast-icon ' + type + '">' + (icons[type] || 'i') + '</div><div class="toast-body"><div class="t-title">' + title + '</div>' + (msg ? '<div class="t-msg">' + msg + '</div>' : '') + '</div>';
   tc.appendChild(el);
   setTimeout(() => { el.classList.add('fade-out'); setTimeout(() => el.remove(), 350); }, duration);
 }
 
-/* ════════════════════════════════════════════════
-   MODAL
-   ════════════════════════════════════════════════ */
+/* ═══════════════ MODAL ═══════════════ */
 function showModal(opts) {
   document.getElementById('modal-icon').style.background = opts.iconBg || '#dbeafe';
-  document.getElementById('modal-icon').innerHTML        = opts.icon  || '';
-  document.getElementById('modal-title').textContent     = opts.title || '';
-  document.getElementById('modal-sub').innerHTML         = opts.sub   || '';
+  document.getElementById('modal-icon').innerHTML    = opts.icon  || '';
+  document.getElementById('modal-title').textContent = opts.title || '';
+  document.getElementById('modal-sub').innerHTML     = opts.sub   || '';
   const actEl = document.getElementById('modal-actions'); actEl.innerHTML = '';
   (opts.buttons || []).forEach(b => {
     const btn = document.createElement('button'); btn.className = 'modal-btn ' + (b.cls || 'ghost'); btn.textContent = b.label;
-    btn.addEventListener('click', () => { closeModal(); if (b.action) b.action(); });
-    actEl.appendChild(btn);
+    btn.addEventListener('click', () => { closeModal(); if (b.action) b.action(); }); actEl.appendChild(btn);
   });
   document.getElementById('modal-overlay').classList.add('show');
 }
 function closeModal() { document.getElementById('modal-overlay').classList.remove('show'); }
 
-/* ════════════════════════════════════════════════
-   UTILS
-   ════════════════════════════════════════════════ */
+/* ═══════════════ UTILS ═══════════════ */
 function showPage(id) {
-  ['hal-cover', 'hal-peserta', 'hal-soal'].forEach(pid => {
-    document.getElementById(pid).classList.toggle('hidden', pid !== id);
-  });
+  ['hal-cover','hal-peserta','hal-soal'].forEach(pid => { document.getElementById(pid).classList.toggle('hidden', pid !== id); });
 }
 
-/* ════════════════════════════════════════════════
-   PARSE MATH
-   ════════════════════════════════════════════════ */
+/* ═══════════════ PARSE MATH ═══════════════ */
 function parseMath(s) {
   if (!s) return s;
   const greek = { 'alpha':'α','beta':'β','gamma':'γ','delta':'δ','epsilon':'ε','theta':'θ','lambda':'λ','mu':'μ','pi':'π','sigma':'σ','omega':'ω','phi':'φ','psi':'ψ','rho':'ρ','nu':'ν','eta':'η','tau':'τ','xi':'ξ','zeta':'ζ','Delta':'Δ','Sigma':'Σ','Omega':'Ω','Lambda':'Λ','Pi':'Π','Phi':'Φ','Gamma':'Γ','Theta':'Θ' };
