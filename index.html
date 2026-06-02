@@ -706,7 +706,7 @@ window.addEventListener('offline', () => { updateOfflineBanner(); saveSession();
 let coverData = null, logoDataUri = '', siswaAktif = null, modeManual = false;
 let infoMapelData = null, soalList = [], jawaban = {}, currentIdx = 0;
 let submitCardShown = false, timerInterval = null, readingDone = false;
-let timerSisaDetik = 15, timerCekPeserta = null;
+let timerSisaDetik = 30, timerCekPeserta = null;
 let kodeMapelAktif = '', mataPelajaranAktif = '';
 
 /* ═══════════════ GAS FETCH ═══════════════ */
@@ -1071,7 +1071,7 @@ function renderNav() {
 
 /* ═══════════════ TIMER ═══════════════ */
 function mulaiTimer() {
-  clearInterval(timerInterval); timerSisaDetik = 15; readingDone = false;
+  clearInterval(timerInterval); timerSisaDetik = 30; readingDone = false;
   const barEl = document.getElementById('timer-bar'), fillEl = document.getElementById('timer-bar-fill');
   const countEl = document.getElementById('timer-countdown'), labelEl = document.getElementById('timer-label'), iconEl = document.getElementById('timer-icon');
   const timerForIdx = currentIdx;
